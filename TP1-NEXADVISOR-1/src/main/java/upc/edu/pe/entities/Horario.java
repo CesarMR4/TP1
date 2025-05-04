@@ -1,5 +1,4 @@
-package org.springframework.stereotype;
-
+package upc.edu.pe.entities;
 import java.util.Date;
 
 import jakarta.persistence.Column;

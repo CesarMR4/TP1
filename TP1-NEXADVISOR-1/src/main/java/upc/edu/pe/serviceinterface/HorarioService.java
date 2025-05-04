@@ -1,4 +1,4 @@
-package org.springframework.stereotype;
+package upc.edu.pe.serviceinterface;
 
 import java.util.List;
 import java.util.Optional;
