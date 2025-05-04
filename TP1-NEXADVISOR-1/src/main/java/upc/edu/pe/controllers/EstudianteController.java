@@ -1,9 +1,9 @@
-package org.springframework.stereotype;
+package upc.edu.pe.controllers;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.RestController;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RestController;
 
 import upc.edu.pe.entities.Estudiante;
 import upc.edu.pe.serviceinterface.EstudianteService;
@@ -31,7 +31,7 @@ public class EstudianteController {
 	    }
 	 @GetMapping
 	    public List<Estudiante> listar(){
-	        return pService.list();// devuelve JSON para hacer las validaciones en PostMan o Swagger
+	        return pService.list();
 	    }
 	 @DeleteMapping("/{id}")
 	    public void eliminar(@PathVariable ("id") Integer idEstudiante){ pService.delete(idEstudiante);

@@ -1,4 +1,4 @@
-package org.springframework.stereotype;
+package upc.edu.pe.serviceimplements;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,10 +27,15 @@ public class EstudianteServiceImpl implements EstudianteService {
 	 @Override
 	 public void delete(int idEstudiante) {pR.deleteById(idEstudiante);}
 	 
-	 @Override
-		public Optional<Estudiante> listId(int id) {
+	 /*	 @Override
+	public Optional<Estudiante> listId(int id) {
 			return pR.findById(id);
-		}
+		}*/
+	@Override
+	public Optional<Estudiante> listId_Estudiante(int idEstudiante) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
 	
 
 }

@@ -1,8 +1,6 @@
 package upc.edu.pe.serviceinterface;
 
 import java.util.List;
-
-import pe.edu.upc.demotopstorefinder.entities.Comprador;
 import upc.edu.pe.entities.Estudiante;
 import java.util.Optional;
 

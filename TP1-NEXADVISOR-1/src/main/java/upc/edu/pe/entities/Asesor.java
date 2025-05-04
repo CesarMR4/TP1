@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 public class Asesor {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_Asesor;
 	@Column(name = "nombre", nullable = false, length = 25)
     private String nombre;
@@ -36,6 +36,7 @@ public class Asesor {
     private Date fechaRegistro;
 	@Column(name = "rol", nullable = false, length = 10)
     private String rol = "asesor";
+	
 	public int getId_Asesor() {
 		return id_Asesor;
 	}

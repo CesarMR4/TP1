@@ -1,14 +1,21 @@
 package upc.edu.pe.entities;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+
+import java.util.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Estudiante")
 public class Estudiante {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@jakarta.persistence.GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_Estudiante;
 	@Column(name = "nombre", nullable = false, length = 25)
 	private String nombre;
@@ -100,7 +107,5 @@ public class Estudiante {
 	        this.rol = rol;
 	    }
 	    
-	    
-´	
 
 }
