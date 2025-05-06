@@ -39,4 +39,10 @@ public class AsesorServiceImpl implements AsesorService {
 		return asesorRespository.findById(id);
 	}
 
+	@Override
+	public void update(Asesor asesor) {
+		 asesorRespository.save(asesor);
+
+	}
+
 }

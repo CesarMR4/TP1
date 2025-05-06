@@ -14,28 +14,31 @@ import upc.edu.pe.serviceinterface.EstudianteService;
 public class EstudianteServiceImpl implements EstudianteService {
 	
 	@Autowired
-	private EstudianteRepository pR;
+	private EstudianteRepository estudianteRepository;
 	
 	@Override 
 	public void insert(Estudiante estudiante) {
-		pR.save(estudiante);
+		estudianteRepository.save(estudiante);
 	}
 	@Override
 	 public List<Estudiante> list() {
-        return pR.findAll();
+        return estudianteRepository.findAll();
     }
 	 @Override
-	 public void delete(int idEstudiante) {pR.deleteById(idEstudiante);}
+	 public void delete(int idEstudiante) {estudianteRepository.deleteById(idEstudiante);}
 	 
-	 /*	 @Override
-	public Optional<Estudiante> listId(int id) {
-			return pR.findById(id);
-		}*/
+
 	@Override
 	public Optional<Estudiante> listId_Estudiante(int idEstudiante) {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		return  estudianteRepository.findById(idEstudiante);
 	}
+	@Override
+	public void update(Estudiante estudiante) {
+		// TODO Auto-generated method stub
+		estudianteRepository.save(estudiante);
+	}
+	
 	
 
 }

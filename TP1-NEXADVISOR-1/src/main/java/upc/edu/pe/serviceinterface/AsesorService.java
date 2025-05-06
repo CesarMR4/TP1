@@ -11,4 +11,5 @@ public interface AsesorService {
 	public List<Asesor>list();
 	public void delete (int id);
 	Optional<Asesor> listId(int id);
+	public void update(Asesor asesor);
 }

@@ -4,12 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,8 +25,8 @@ public class EstudianteController {
     private EstudianteService pService;
 	
 	 @PostMapping
-	    public void registrar(@RequestBody Estudiante tp){
-	        pService.insert(tp);
+	    public void registrar(@RequestBody Estudiante estudiante){
+	        pService.insert(estudiante);
 	    }
 	 @GetMapping
 	    public List<Estudiante> listar(){
@@ -36,6 +35,16 @@ public class EstudianteController {
 	 @DeleteMapping("/{id}")
 	    public void eliminar(@PathVariable ("id") Integer idEstudiante){ pService.delete(idEstudiante);
 	    }
-	 
+	 @GetMapping("/{id}")
+	 public Estudiante obtenerPorId(@PathVariable("id") Integer idEstudiante) {
+	     return pService.listId_Estudiante(idEstudiante)
+	                    .orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
+	 }
+	 @PutMapping("/{id}")
+	 public void actualizar(@PathVariable("id") Integer idEstudiante, @RequestBody Estudiante estudiante) {  
+	     estudiante.setId_estudiante(idEstudiante);
+	       pService.update(estudiante);
+	    }
+	   
 
 }
