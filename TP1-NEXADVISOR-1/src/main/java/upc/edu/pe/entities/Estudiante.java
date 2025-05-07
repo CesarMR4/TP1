@@ -20,6 +20,8 @@ public class Estudiante {
 	private int id_Estudiante;
 	@Column(name = "nombre", nullable = false, length = 25)
 	private String nombre;
+	@Column(name = "email", nullable = false, length = 25)
+	private String email;
 	@Column(name = "contrasena", nullable = false, length = 25)
 	private String contrasena;
 	@Column(name = "direccion", nullable = false, length = 50)
@@ -38,11 +40,12 @@ public class Estudiante {
 	public Estudiante () {
 		super();
 	}
-	 public Estudiante(int id_Estudiante, String nombre, String contrasena, String direccion, 
+	 public Estudiante(int id_Estudiante, String nombre,String email, String contrasena, String direccion, 
 			 String telefono, String curriculum, String carrera, Date fechaRegistro, String rol) {
 	         
 		 this.id_Estudiante = id_Estudiante;
 		 this.nombre = nombre;
+		 this.email = email;
 		 this.contrasena = contrasena;
 		 this.direccion = direccion;
 		 this.telefono = telefono;
@@ -61,9 +64,14 @@ public class Estudiante {
 	    public String getNombre () {
 	        return nombre;
 	    }
-
 	    public void setNombre(String nombre) {
 	        this.nombre = nombre;
+	    }
+	    public String getEmail () {
+	        return email;
+	    }
+	    public void setEmail(String email) {
+	        this.email = email;
 	    }
 	    public String getContrasena () {
 	        return contrasena;
@@ -107,6 +115,10 @@ public class Estudiante {
 	    public void setRol(String rol) {
 	        this.rol = rol;
 	    }
+		public String getPassword() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 	    
 
 }

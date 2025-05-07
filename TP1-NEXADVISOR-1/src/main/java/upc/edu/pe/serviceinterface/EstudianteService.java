@@ -11,4 +11,5 @@ public interface EstudianteService {
 	    public void delete(int idEstudiante);
 		Optional<Estudiante> listId_Estudiante(int idEstudiante);
 		public void update(Estudiante estudiante);
+		Optional<Estudiante> login(String emails, String contrasena);
 }

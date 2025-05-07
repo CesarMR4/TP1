@@ -45,6 +45,11 @@ public class EstudianteController {
 	     estudiante.setId_estudiante(idEstudiante);
 	       pService.update(estudiante);
 	    }
+	 @PostMapping("/login")
+	 public Estudiante login(@RequestBody Estudiante estudiante) {
+	     return pService.login(estudiante.getEmail(), estudiante.getPassword())
+	                    .orElseThrow(() -> new RuntimeException("Credenciales incorrectas"));
+	 }
 	   
 
 }

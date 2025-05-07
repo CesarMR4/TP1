@@ -38,6 +38,11 @@ public class EstudianteServiceImpl implements EstudianteService {
 		// TODO Auto-generated method stub
 		estudianteRepository.save(estudiante);
 	}
+	@Override
+	public Optional<Estudiante> login(String email, String contrasena) {
+		return estudianteRepository.findByEmailAndPassword(email, contrasena);
+		
+	}
 	
 	
 
