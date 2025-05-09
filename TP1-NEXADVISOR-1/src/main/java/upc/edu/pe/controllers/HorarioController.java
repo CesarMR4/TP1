@@ -2,7 +2,6 @@ package upc.edu.pe.controllers;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,8 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import upc.edu.pe.entities.Horario;
 import upc.edu.pe.serviceinterface.HorarioService;
-
-
 
 
 @RestController
