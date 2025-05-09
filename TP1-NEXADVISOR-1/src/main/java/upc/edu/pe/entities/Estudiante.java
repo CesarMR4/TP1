@@ -23,7 +23,7 @@ public class Estudiante {
 	@Column(name = "email", nullable = false, length = 25)
 	private String email;
 	@Column(name = "contrasena", nullable = false, length = 25)
-	private String contrasena;
+	private String password;
 	@Column(name = "direccion", nullable = false, length = 50)
 	private String direccion;
 	@Column(name = "telefono", nullable = false, length = 15)
@@ -32,7 +32,7 @@ public class Estudiante {
 	private String curriculum;
 	@Column(name = "carrera", nullable = false, length = 25)
 	private String carrera;
-	@Column(name = "fechaRegistro", nullable = false, length = 25)
+	@Column(name = "fechaRegistro", nullable = true, length = 25)
 	private Date fechaRegistro;
 	@Column(name = "rol", nullable = false, length = 10)
 	private String rol = "estudiante";
@@ -40,13 +40,13 @@ public class Estudiante {
 	public Estudiante () {
 		super();
 	}
-	 public Estudiante(int id_Estudiante, String nombre,String email, String contrasena, String direccion, 
+	 public Estudiante(int id_Estudiante, String nombre,String email, String password, String direccion, 
 			 String telefono, String curriculum, String carrera, Date fechaRegistro, String rol) {
 	         
 		 this.id_Estudiante = id_Estudiante;
 		 this.nombre = nombre;
 		 this.email = email;
-		 this.contrasena = contrasena;
+		 this.password = password;
 		 this.direccion = direccion;
 		 this.telefono = telefono;
 		 this.curriculum = curriculum;
@@ -73,11 +73,11 @@ public class Estudiante {
 	    public void setEmail(String email) {
 	        this.email = email;
 	    }
-	    public String getContrasena () {
-	        return contrasena;
+	    public String getPassword() {
+	        return password;
 	    }
-	    public void setContrasena(String contrasena) {
-	        this.contrasena = contrasena;
+	    public void setPassword(String password) {
+	        this.password = password;
 	    }
 	    public String getDireccion () {
 	        return direccion;
@@ -115,10 +115,6 @@ public class Estudiante {
 	    public void setRol(String rol) {
 	        this.rol = rol;
 	    }
-		public String getPassword() {
-			// TODO Auto-generated method stub
-			return null;
-		}
 	    
 
 }

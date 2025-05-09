@@ -39,8 +39,8 @@ public class EstudianteServiceImpl implements EstudianteService {
 		estudianteRepository.save(estudiante);
 	}
 	@Override
-	public Optional<Estudiante> login(String email, String contrasena) {
-		return estudianteRepository.findByEmailAndPassword(email, contrasena);
+	public Optional<Estudiante> login(String email, String password) {
+		return estudianteRepository.findByEmailAndPassword(email, password);
 		
 	}
 	
