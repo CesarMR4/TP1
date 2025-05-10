@@ -7,5 +7,5 @@ import upc.edu.pe.entities.Asesor;
 
 @Repository
 public interface AsesorRepository extends JpaRepository<Asesor, Integer>{
-
+	
 }

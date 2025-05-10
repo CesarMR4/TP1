@@ -3,6 +3,8 @@ package upc.edu.pe.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,10 +29,16 @@ public class AsesorController {
 	private AsesorService aService;
 	
 	
-	@PostMapping
-    public void registrar(@RequestBody Asesor asesor){
-        aService.insert(asesor);
-    }
+	  @PostMapping("/registrar")
+	    public ResponseEntity<String> registrarAsesor(@RequestBody Asesor asesor) {
+	        try {
+	            // Insertar el asesor en la base de datos
+	            aService.insert(asesor);
+	            return new ResponseEntity<>("Asesor registrado exitosamente.", HttpStatus.CREATED);
+	        } catch (Exception e) {
+	            return new ResponseEntity<>("Error al registrar el asesor.", HttpStatus.INTERNAL_SERVER_ERROR);
+	        }
+	    }
  @GetMapping
     public List<Asesor> listar(){
         return aService.list();
