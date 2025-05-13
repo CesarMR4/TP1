@@ -59,6 +59,11 @@ public class AsesorController {
              .map(asesor -> new ResponseEntity<>(asesor, HttpStatus.OK))
              .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
  }
+ @PostMapping("/login")
+ 	public Asesor login(@RequestBody Asesor asesor){
+	 return aService.login(asesor.getEmail(), asesor.getPassword())
+			 .orElseThrow(()-> new RuntimeException("Credenciales incorrectas"));
+ }
 	
  @GetMapping("/buscar/carrera/{carrera}")
  public List<Asesor> buscarPorCarrera(@PathVariable String carrera) {

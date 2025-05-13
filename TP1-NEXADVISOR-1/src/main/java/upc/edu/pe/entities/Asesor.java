@@ -23,7 +23,7 @@ public class Asesor {
 	@Column(name = "email", nullable = false, length = 25)
     private String email;
 	@Column(name = "contrasena", nullable = false, length = 25)
-    private String contrasena;
+    private String password;
 	@Column(name = "direccion", nullable = false, length = 25)
     private String direccion;
 	@Column(name = "telefono", nullable = false, length = 25)
@@ -58,11 +58,11 @@ public class Asesor {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getContrasena() {
-		return contrasena;
+	public String getPassword() {
+		return password;
 	}
-	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getDireccion() {
 		return direccion;
@@ -110,13 +110,13 @@ public class Asesor {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Asesor(int id_Asesor, String nombre, String email, String contrasena, String direccion, String telefono,
+	public Asesor(int id_Asesor, String nombre, String email, String password, String direccion, String telefono,
 			String curriculum, String sector, String carrera, Date fechaRegistro, String rol) {
 		super();
 		this.id_Asesor = id_Asesor;
 		this.nombre = nombre;
 		this.email = email;
-		this.contrasena = contrasena;
+		this.password = password;
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.curriculum = curriculum;

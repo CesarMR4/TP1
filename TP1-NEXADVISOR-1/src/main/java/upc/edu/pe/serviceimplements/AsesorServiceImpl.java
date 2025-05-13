@@ -23,19 +23,16 @@ public class AsesorServiceImpl implements AsesorService {
 
 	@Override
 	public List<Asesor> list() {
-		// TODO Auto-generated method stub
 		return asesorRespository.findAll();
 	}
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
 		asesorRespository.deleteById(id);
 	}
 
 	@Override
 	public Optional<Asesor> listId(int id) {
-		// TODO Auto-generated method stub
 		return asesorRespository.findById(id);
 	}
 
@@ -44,17 +41,20 @@ public class AsesorServiceImpl implements AsesorService {
 		 asesorRespository.save(asesor);
 
 	}
+	@Override
+	public Optional<Asesor> login(String email, String password) {
+		return asesorRespository.findByEmailAndPassword(email, password);
+	}
 
 	@Override
 	public List<Asesor> buscarPorSector(String sector) {
-		// TODO Auto-generated method stub
 		 return asesorRespository.findBySectorIgnoreCase(sector);
 	}
 
 	@Override
 	public List<Asesor> buscarPorCarrera(String carrera) {
-		// TODO Auto-generated method stub
 		return asesorRespository.findByCarreraIgnoreCase(carrera);
 	}
 
+	 
 }

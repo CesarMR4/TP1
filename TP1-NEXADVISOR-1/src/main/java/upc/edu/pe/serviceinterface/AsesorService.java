@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import upc.edu.pe.entities.Asesor;
 
+
 public interface AsesorService {
 
 	public void insert(Asesor asesor);
@@ -14,4 +15,5 @@ public interface AsesorService {
 	public void update(Asesor asesor);
 	public List<Asesor> buscarPorSector(String sector);
 	public List<Asesor> buscarPorCarrera(String carrera);
+	Optional<Asesor> login(String email, String password);
 }
