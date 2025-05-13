@@ -45,4 +45,16 @@ public class AsesorServiceImpl implements AsesorService {
 
 	}
 
+	@Override
+	public List<Asesor> buscarPorSector(String sector) {
+		// TODO Auto-generated method stub
+		 return asesorRespository.findBySectorIgnoreCase(sector);
+	}
+
+	@Override
+	public List<Asesor> buscarPorCarrera(String carrera) {
+		// TODO Auto-generated method stub
+		return asesorRespository.findByCarreraIgnoreCase(carrera);
+	}
+
 }

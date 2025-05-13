@@ -2,6 +2,7 @@ package upc.edu.pe.controllers;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,20 +28,41 @@ public class HorarioController {
 	@Autowired
     private HorarioService pService;
 	
-	@PostMapping
-    public void registrar(@RequestBody Horario h){
+
+    @PostMapping
+    public void registrar(@RequestBody Horario h) {
         pService.insert(h);
     }
-	
-	 @GetMapping
-	    public List<Horario> listar(){
-	        return pService.list();
-	    }
-	 
-	 @DeleteMapping("/{id}")
-	    public void eliminar(@PathVariable ("id") Integer id){ pService.delete(id);}
-	 
-	 @PutMapping
-	    public void actualizar(@RequestBody Horario u){ pService.insert(u);}
+
+
+    @GetMapping
+    public List<Horario> listar() {
+        return pService.list();
+    }
+
+
+    @GetMapping("/{id}")
+    public Optional<Horario> obtenerPorId(@PathVariable("id") int id) {
+        return pService.ListarId(id);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable("id") Integer id) {
+        pService.delete(id);
+    }
+
+
+    @PutMapping("/{id}")
+    public void actualizar(@PathVariable("id") int id, @RequestBody Horario horario) {
+        Optional<Horario> existingHorario = pService.ListarId(id);
+        if (existingHorario.isPresent()) {
+            Horario updatedHorario = existingHorario.get();
+            updatedHorario.setDia(horario.getDia());
+            updatedHorario.setHoraInicio(horario.getHoraInicio());
+            updatedHorario.setHoraFin(horario.getHoraFin());
+            pService.insert(updatedHorario);  
+        }
+    }
 
 }

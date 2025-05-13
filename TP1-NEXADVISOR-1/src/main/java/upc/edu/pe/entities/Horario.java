@@ -58,13 +58,13 @@ public class Horario {
     public Date getHoraInicio() {
     	return Hora_inicio;
     }
-    public void setHoraInicio() {
+    public void setHoraInicio(Date Hora_inicio) {
     	this.Hora_inicio = Hora_inicio;
     }
     public Date getHoraFin() {
     	return Hora_fin;
     }
-    public void setHoraFin() {
+    public void setHoraFin(Date Hora_fin) {
     	this.Hora_fin= Hora_fin;
     }
     public Asesor getAsesor() {

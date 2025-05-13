@@ -24,6 +24,8 @@ public class Reserva {
     private String horaReserva; 
     @Column(name = "estado", nullable = false, length = 20)
     private String estado; 
+    @Column(name = "comentario_asesor", length = 500)
+    private String comentarioAsesor;
     @ManyToOne
     @JoinColumn(name = "estudiante_id", referencedColumnName = "id_Estudiante", nullable = false)
     private Estudiante estudiante;
@@ -36,12 +38,14 @@ public class Reserva {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reserva(int id, Date fechaReserva, String horaReserva, String estado, Estudiante estudiante, Asesor asesor) {
+	public Reserva(int id, Date fechaReserva, String horaReserva, String estado, String comentarioAsesor,
+			Estudiante estudiante, Asesor asesor) {
 		super();
 		this.id = id;
 		this.fechaReserva = fechaReserva;
 		this.horaReserva = horaReserva;
 		this.estado = estado;
+		this.comentarioAsesor = comentarioAsesor;
 		this.estudiante = estudiante;
 		this.asesor = asesor;
 	}
@@ -78,6 +82,14 @@ public class Reserva {
 		this.estado = estado;
 	}
 
+	public String getComentarioAsesor() {
+		return comentarioAsesor;
+	}
+
+	public void setComentarioAsesor(String comentarioAsesor) {
+		this.comentarioAsesor = comentarioAsesor;
+	}
+
 	public Estudiante getEstudiante() {
 		return estudiante;
 	}
@@ -92,8 +104,10 @@ public class Reserva {
 
 	public void setAsesor(Asesor asesor) {
 		this.asesor = asesor;
-	} 
+	}
+
 	
 	
 }
+
 

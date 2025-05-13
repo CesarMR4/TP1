@@ -11,4 +11,6 @@ public interface ForoService {
 	   public void insert(Foro foro );
 	   public List<Foro> list();
 	   public void delete(int id);
+	   public void update(Foro foro);
+
 }

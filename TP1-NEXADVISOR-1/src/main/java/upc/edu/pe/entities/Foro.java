@@ -22,7 +22,7 @@ public class Foro {
 	 private int id;
 	 @Column(name = "titulo", nullable = false)
 	 private String titulo; 
-	 @Column(name = "horareserva", nullable = false)
+	 @Column(name = "contenido", nullable = false)
 	 private String contenido; 
 	 @Column(name = "fechacreacion", nullable = false, length = 20)
 	 private Date fechacreacion; 

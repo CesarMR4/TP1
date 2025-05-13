@@ -44,4 +44,13 @@ public class ReservaServiceImpl implements ReservaService{
 
 	}
 
+	@Override
+	public void actualizarComentario(int idReserva, String comentarioAsesor) {
+	    Optional<Reserva> reserva = reservaRepository.findById(idReserva);
+	    if (reserva.isPresent()) {
+	        reserva.get().setComentarioAsesor(comentarioAsesor);
+	        reservaRepository.save(reserva.get());	
+	    }
+	}
+
 }

@@ -12,5 +12,6 @@ public interface AsesorService {
 	public void delete (int id);
 	Optional<Asesor> listId(int id);
 	public void update(Asesor asesor);
-	
+	public List<Asesor> buscarPorSector(String sector);
+	public List<Asesor> buscarPorCarrera(String carrera);
 }

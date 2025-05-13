@@ -52,7 +52,23 @@ public class AsesorController {
      asesor.setId_Asesor(idAsesor);
      aService.update(asesor);
  }
+ 
+ @GetMapping("/{id}")
+ public ResponseEntity<Asesor> obtenerPorId(@PathVariable("id") Integer id) {
+     return aService.listId(id)
+             .map(asesor -> new ResponseEntity<>(asesor, HttpStatus.OK))
+             .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+ }
 	
+ @GetMapping("/buscar/carrera/{carrera}")
+ public List<Asesor> buscarPorCarrera(@PathVariable String carrera) {
+     return aService.buscarPorCarrera(carrera);
+ }
+
+ @GetMapping("/buscar/sector/{sector}")
+ public List<Asesor> buscarPorSector(@PathVariable String sector) {
+     return aService.buscarPorSector(sector);
+ }
 }
 		
 		

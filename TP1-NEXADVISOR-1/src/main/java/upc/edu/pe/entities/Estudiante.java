@@ -10,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "Estudiante")
@@ -33,6 +35,7 @@ public class Estudiante {
 	@Column(name = "carrera", nullable = false, length = 25)
 	private String carrera;
 	@Column(name = "fechaRegistro", nullable = true, length = 25)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fechaRegistro;
 	@Column(name = "rol", nullable = false, length = 10)
 	private String rol = "estudiante";

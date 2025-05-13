@@ -34,4 +34,10 @@ public class ForoServiceImpl implements ForoService{
 		foroRespository.deleteById(id);
 	}
 
+	@Override
+	public void update(Foro foro) {
+		foroRespository.save(foro);
+		
+	}
+
 }
