@@ -21,15 +21,8 @@ public class Comentario {
 
 	 @Column(name = "contenido", nullable = false)
 	 private String contenido;
-
 	 @Column(name = "fechacreacion", nullable = false)
-	 //@Temporal(TemporalType.TIMESTAMP)
 	 private Date fechacreacion;
-
-	 @ManyToOne
-	 @JoinColumn(name = "foro_id", referencedColumnName = "id", nullable = false)
-	    private Foro foro;
-
 	 @ManyToOne
 	 @JoinColumn(name = "estudiante_id", referencedColumnName = "id_Estudiante", nullable = false)
 	 private Estudiante estudiante;
@@ -39,12 +32,11 @@ public class Comentario {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comentario(int id, String contenido, Date fechacreacion, Foro foro, Estudiante estudiante) {
+	public Comentario(int id, String contenido, Date fechacreacion, Estudiante estudiante) {
 		super();
 		this.id = id;
 		this.contenido = contenido;
 		this.fechacreacion = fechacreacion;
-		this.foro = foro;
 		this.estudiante = estudiante;
 	}
 
@@ -72,13 +64,6 @@ public class Comentario {
 		this.fechacreacion = fechacreacion;
 	}
 
-	public Foro getForo() {
-		return foro;
-	}
-
-	public void setForo(Foro foro) {
-		this.foro = foro;
-	}
 
 	public Estudiante getEstudiante() {
 		return estudiante;

@@ -57,11 +57,11 @@ public class Estudiante {
 		 this.fechaRegistro = fechaRegistro;
 		 this.rol = rol;
 	    }
-	  public int getId_estudiante() {
+	  public int getIdEstudiante() {
 	        return id_Estudiante;
 	    }
 
-	    public void setId_estudiante(int id_Estudiante) {
+	    public void setIdEstudiante(int id_Estudiante) {
 	        this.id_Estudiante = id_Estudiante;
 	    }
 	    public String getNombre () {

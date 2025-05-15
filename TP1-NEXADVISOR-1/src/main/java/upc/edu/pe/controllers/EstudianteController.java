@@ -42,7 +42,7 @@ public class EstudianteController {
 	 }
 	 @PutMapping("/{id}")
 	 public void actualizar(@PathVariable("id") Integer idEstudiante, @RequestBody Estudiante estudiante) {  
-	     estudiante.setId_estudiante(idEstudiante);
+	     estudiante.setIdEstudiante(idEstudiante);
 	       pService.update(estudiante);
 	    }
 	 @PostMapping("/login")

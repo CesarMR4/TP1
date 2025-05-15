@@ -22,12 +22,6 @@ public class ComentarioServiceImpl implements ComentarioService{
 	}
 
 	@Override
-	public List<Comentario> listByForoId(int foroId) {
-		// TODO Auto-generated method stub
-		  return comentarioRepository.findByForoId(foroId);
-	}
-
-	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		 comentarioRepository.deleteById(id);
@@ -38,5 +32,12 @@ public class ComentarioServiceImpl implements ComentarioService{
 		// TODO Auto-generated method stub
 		   comentarioRepository.save(comentario);
 	}
+
+	@Override
+	public Comentario findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
