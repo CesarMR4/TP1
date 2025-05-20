@@ -12,4 +12,6 @@ public interface EstudianteService {
 		Optional<Estudiante> listId_Estudiante(int idEstudiante);
 		public void update(Estudiante estudiante);
 		Optional<Estudiante> login(String email, String password);
+		Optional<Estudiante> findByEmail(String email);
+		void updatePassword(String email, String nuevaPassword);
 }

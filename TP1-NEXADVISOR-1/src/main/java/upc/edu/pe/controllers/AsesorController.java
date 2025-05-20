@@ -1,6 +1,7 @@
 package upc.edu.pe.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import upc.edu.pe.entities.Asesor;
-
+import upc.edu.pe.entities.Auxiliar;
 import upc.edu.pe.serviceinterface.AsesorService;
 
 @RestController
@@ -73,6 +74,22 @@ public class AsesorController {
  @GetMapping("/buscar/sector/{sector}")
  public List<Asesor> buscarPorSector(@PathVariable String sector) {
      return aService.buscarPorSector(sector);
+ }
+ @PutMapping("/reset-password")
+ public String resetPassword(@RequestBody Auxiliar request) {
+     Optional<Asesor> asesorOpt = aService.findByEmail(request.getEmail());
+
+     if (asesorOpt.isPresent()) {
+         Asesor asesor = asesorOpt.get();
+         if (asesor.getTelefono().equals(request.getNumeroTelefonico())) {
+             aService.updatePassword(request.getEmail(), request.getNuevaPassword());
+             return "Contraseña actualizada correctamente.";
+         } else {
+             return "Número telefónico incorrecto.";
+         }
+     } else {
+         return "Correo no encontrado.";
+     }
  }
 }
 		

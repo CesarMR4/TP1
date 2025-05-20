@@ -12,5 +12,6 @@ import upc.edu.pe.entities.Estudiante;
 public interface EstudianteRepository extends JpaRepository<Estudiante,Integer> {
 
 	Optional<Estudiante> findByEmailAndPassword(String email, String password);
+	Optional<Estudiante> findByEmail(String email);
 
 }

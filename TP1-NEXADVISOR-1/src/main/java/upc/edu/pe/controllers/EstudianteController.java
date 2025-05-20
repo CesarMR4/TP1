@@ -1,6 +1,7 @@
 package upc.edu.pe.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import upc.edu.pe.entities.Estudiante;
+import upc.edu.pe.entities.Auxiliar;
 import upc.edu.pe.serviceinterface.EstudianteService;
 
 
@@ -49,6 +51,22 @@ public class EstudianteController {
 	 public Estudiante login(@RequestBody Estudiante estudiante) {
 	     return pService.login(estudiante.getEmail(), estudiante.getPassword())
 	                    .orElseThrow(() -> new RuntimeException("Credenciales incorrectas"));
+	 }
+	 @PutMapping("/reset-password")
+	 public String resetPassword(@RequestBody Auxiliar request) {
+	     Optional<Estudiante> estudianteOpt = pService.findByEmail(request.getEmail());
+
+	     if (estudianteOpt.isPresent()) {
+	         Estudiante estudiante = estudianteOpt.get();
+	         if (estudiante.getTelefono().equals(request.getNumeroTelefonico())) {
+	             pService.updatePassword(request.getEmail(), request.getNuevaPassword());
+	             return "Contraseña actualizada correctamente.";
+	         } else {
+	             return "Número telefónico incorrecto.";
+	         }
+	     } else {
+	         return "Correo no encontrado.";
+	     }
 	 }
 	   
 

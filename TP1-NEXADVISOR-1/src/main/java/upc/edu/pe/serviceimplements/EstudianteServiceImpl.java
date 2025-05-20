@@ -43,6 +43,22 @@ public class EstudianteServiceImpl implements EstudianteService {
 		return estudianteRepository.findByEmailAndPassword(email, password);
 		
 	}
+	@Override
+	public Optional<Estudiante> findByEmail(String email) {
+		 return estudianteRepository.findByEmail(email);
+	}
+	@Override
+	public void updatePassword(String email, String nuevaPassword) {
+		  Optional<Estudiante> estudianteOpt = estudianteRepository.findByEmail(email);
+		    if (estudianteOpt.isPresent()) {
+		        Estudiante estudiante = estudianteOpt.get();
+		        estudiante.setPassword(nuevaPassword);
+		        estudianteRepository.save(estudiante);
+		    } else {
+		        throw new RuntimeException("Correo no registrado.");
+		    }
+		
+	}
 	
 	
 

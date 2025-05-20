@@ -55,6 +55,24 @@ public class AsesorServiceImpl implements AsesorService {
 	public List<Asesor> buscarPorCarrera(String carrera) {
 		return asesorRespository.findByCarreraIgnoreCase(carrera);
 	}
+	
+	@Override
+	public Optional<Asesor> findByEmail(String email) {
+		return asesorRespository.findByEmail(email);
+	}
+
+	@Override
+	public void updatePassword(String email, String nuevaPassword) {
+		 Optional<Asesor> asesorOpt = asesorRespository.findByEmail(email);
+		    if (asesorOpt.isPresent()) {
+		        Asesor asesor = asesorOpt.get();
+		        asesor.setPassword(nuevaPassword);
+		        asesorRespository.save(asesor);
+		    } else {
+		        throw new RuntimeException("Correo no registrado.");
+		    }
+		
+	}
 
 	 
 }
