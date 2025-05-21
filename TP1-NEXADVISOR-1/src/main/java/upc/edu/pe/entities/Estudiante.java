@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -30,6 +31,7 @@ public class Estudiante {
 	private String direccion;
 	@Column(name = "telefono", nullable = false, length = 15)
 	private String telefono;
+	@Lob
 	@Column(name = "curriculum", nullable = false, length = 25)
 	private String curriculum;
 	@Column(name = "carrera", nullable = false, length = 25)
