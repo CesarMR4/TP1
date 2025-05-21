@@ -60,7 +60,7 @@ public class AsesorController {
              .map(asesor -> new ResponseEntity<>(asesor, HttpStatus.OK))
              .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
  }
- @PostMapping("/login")
+ @PostMapping("/login/asesor")
  	public Asesor login(@RequestBody Asesor asesor){
 	 return aService.login(asesor.getEmail(), asesor.getPassword())
 			 .orElseThrow(()-> new RuntimeException("Credenciales incorrectas"));
