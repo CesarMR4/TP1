@@ -11,9 +11,9 @@ public class NotificacionController {
 	@Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-    public void notificarReserva(String mensaje) {
-        Notificacion notificacion = new Notificacion(mensaje);
-        messagingTemplate.convertAndSend("/notificacion/reservas", notificacion);
-    }
+	public void notificarReserva(int idAsesor, String mensaje) {
+	    Notificacion notificacion = new Notificacion(mensaje);
+	    messagingTemplate.convertAndSend("/notificacion/reservas/" + idAsesor, notificacion);
+	}
 
 }

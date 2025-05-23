@@ -22,11 +22,19 @@ public class ReservaController {
 
     @Autowired
     private ReservaService reservaService;
+    @Autowired
+    private NotificacionController notificacionController;
 
 
     @PostMapping
     public void registrarReserva(@RequestBody Reserva reserva) {
         reservaService.insert(reserva);
+        // Suponiendo que en el objeto reserva ya viene el asesor elegido
+        int idAsesor = reserva.getAsesor().getId_Asesor();;   // ajusta esto según tu modelo
+
+        String mensaje = "Nuevo estudiante ha realizado una reserva.";
+        notificacionController.notificarReserva(idAsesor, mensaje);
+        
     }
 
     @GetMapping

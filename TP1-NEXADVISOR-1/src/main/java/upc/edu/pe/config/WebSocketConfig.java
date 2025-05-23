@@ -13,12 +13,13 @@ public class WebSocketConfig implements  WebSocketMessageBrokerConfigurer{
 	
 	@Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/notificacion"); // destino donde el frontend se suscribe
-        config.setApplicationDestinationPrefixes("/app"); // prefijo para los envíos desde frontend al backend
+        config.enableSimpleBroker("/notificacion");
+        config.setApplicationDestinationPrefixes("/app");
     }
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").setAllowedOrigins("*").withSockJS(); // endpoint para conectar con frontend
+        registry.addEndpoint("/ws").setAllowedOrigins("*").withSockJS();
     }
+
 }
