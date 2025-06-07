@@ -69,6 +69,7 @@ public class HorarioController {
     public List<Horario> obtenerPorAsesor(@PathVariable("idAsesor") int idAsesor) {
         return pService.findByAsesorId(idAsesor);
     }
+    
 
 
 }
