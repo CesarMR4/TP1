@@ -11,6 +11,7 @@ public interface HorarioService {
 	 public List<Horario> list();
 	 public void delete(int id);
 	 Optional<Horario> ListarId(int idHorario);
+	 List<Horario> findByAsesorId(int idAsesor);
 
 
 }

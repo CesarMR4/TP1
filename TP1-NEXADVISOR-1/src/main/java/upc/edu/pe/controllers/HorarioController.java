@@ -64,5 +64,11 @@ public class HorarioController {
             pService.insert(updatedHorario);  
         }
     }
+    
+    @GetMapping("/asesor/{idAsesor}")
+    public List<Horario> obtenerPorAsesor(@PathVariable("idAsesor") int idAsesor) {
+        return pService.findByAsesorId(idAsesor);
+    }
+
 
 }

@@ -34,5 +34,10 @@ public class HorarioServiceImpl implements HorarioService{
 	        return pR.findById(idHorario);
 	    }
 
+	@Override
+	public List<Horario> findByAsesorId(int idAsesor) {
+		return pR.findByAsesorId(idAsesor);
+	}
+
 
 }
