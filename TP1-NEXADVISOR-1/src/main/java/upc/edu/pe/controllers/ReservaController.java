@@ -58,4 +58,15 @@ public class ReservaController {
     public void actualizarComentario(@PathVariable("id") Integer idReserva, @RequestBody String comentario) {
         reservaService.actualizarComentario(idReserva, comentario);
     }
+
+    @GetMapping("/estudiante/{id}")
+    public List<Reserva> listarPorEstudiante(@PathVariable("id") int idEstudiante) {
+        return reservaService.listarPorEstudiante(idEstudiante);
+    }
+    @GetMapping("/asesor/{id}")
+    public List<Reserva> listarPorAsesor(@PathVariable("id") int idAsesor) {
+        return reservaService.listarPorAsesor(idAsesor);
+    }
+
+
 }

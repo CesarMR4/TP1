@@ -11,5 +11,7 @@ public interface ReservaService {
     public void delete(int id);
     public void updateEstado(int idReserva, String estado);
     public void actualizarComentario(int idReserva, String comentarioAsesor);
-   // public List<Reserva> listByFecha(String fecha);
+    List<Reserva> listarPorEstudiante(int idEstudiante);
+    List<Reserva> listarPorAsesor(int idAsesor);
+
 }

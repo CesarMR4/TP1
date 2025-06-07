@@ -53,4 +53,15 @@ public class ReservaServiceImpl implements ReservaService{
 	    }
 	}
 
+
+	@Override
+	public List<Reserva> listarPorEstudiante(int idEstudiante) {
+		return reservaRepository.findByEstudianteId(idEstudiante);
+
+	}
+	@Override
+	public List<Reserva> listarPorAsesor(int idAsesor) {
+	    return reservaRepository.findByAsesorId(idAsesor);
+	}
+
 }
