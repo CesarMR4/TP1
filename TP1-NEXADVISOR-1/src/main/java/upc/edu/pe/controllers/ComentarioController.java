@@ -55,4 +55,9 @@ public class ComentarioController {
         comentario.setId(id);
         comentarioService.update(comentario);
     }
+    @GetMapping("/asesor/{id}")
+    public List<Comentario> listarComentariosPorAsesor(@PathVariable("id") int idAsesor) {
+        return comentarioService.listarPorAsesor(idAsesor);
+    }
+
 }

@@ -9,4 +9,6 @@ import upc.edu.pe.entities.Comentario;
 
 @Repository
 public interface ComentarioRepository extends JpaRepository<Comentario, Integer>{
+	List<Comentario> findByAsesorId(int idAsesor);
+
 }

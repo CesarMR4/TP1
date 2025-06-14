@@ -10,4 +10,5 @@ public interface ComentarioService {
 	 void delete(int id);                                
 	 void update(Comentario comentario);
 	 Comentario findById(int id);
+	 List<Comentario> listarPorAsesor(int idAsesor);
 }

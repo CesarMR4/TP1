@@ -38,6 +38,10 @@ public class ComentarioServiceImpl implements ComentarioService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public List<Comentario> listarPorAsesor(int idAsesor) {
+	    return comentarioRepository.findByAsesorId(idAsesor);
+	}
 
 
 }
