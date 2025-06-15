@@ -23,9 +23,9 @@ public class ReservaServiceImpl implements ReservaService{
 	public void insert(Reserva reserva) {
 		// TODO Auto-generated method stub
 		 reservaRepository.save(reserva);
-		 int idAsesor = reserva.getAsesor().getId_Asesor(); // suponiendo que tienes acceso al objeto Asesor en la reserva
-		    String mensaje = "Se ha registrado una nueva reserva.";
-		    notificacionController.notificarReserva(idAsesor, mensaje);
+		 int idAsesor = reserva.getAsesor().getId_Asesor(); 
+		 String mensaje = "Se ha registrado una nueva reserva.";
+		 notificacionController.notificarReserva(idAsesor, mensaje);
 	}
 
 	@Override
