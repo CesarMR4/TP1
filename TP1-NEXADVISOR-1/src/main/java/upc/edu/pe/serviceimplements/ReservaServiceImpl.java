@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import upc.edu.pe.controllers.NotificacionController;
 import upc.edu.pe.entities.Reserva;
 import upc.edu.pe.repositories.ReservaRepository;
 import upc.edu.pe.serviceinterface.ReservaService;
@@ -15,11 +16,16 @@ public class ReservaServiceImpl implements ReservaService{
 	
     @Autowired 
 	private ReservaRepository reservaRepository;
+    @Autowired
+    private NotificacionController notificacionController;
 
 	@Override
 	public void insert(Reserva reserva) {
 		// TODO Auto-generated method stub
 		 reservaRepository.save(reserva);
+		 int idAsesor = reserva.getAsesor().getId_Asesor(); // suponiendo que tienes acceso al objeto Asesor en la reserva
+		    String mensaje = "Se ha registrado una nueva reserva.";
+		    notificacionController.notificarReserva(idAsesor, mensaje);
 	}
 
 	@Override
