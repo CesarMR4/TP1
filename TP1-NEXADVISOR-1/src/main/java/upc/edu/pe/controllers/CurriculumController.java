@@ -53,12 +53,10 @@ public class CurriculumController {
 
     @GetMapping("/reporte/{idReserva}")
     public Curriculum obtenerReportePorReserva(@PathVariable int idReserva) {
-        Optional<Reserva> reservaOpt = reservaService.buscarPorId(idReserva);  // Cambio aquí
-
+        Optional<Reserva> reservaOpt = reservaService.buscarPorId(idReserva);  
         if (!reservaOpt.isPresent()) {
             return null;
         }
-
         Optional<Curriculum> curriculumOpt = curriculumService.buscarPorReserva(reservaOpt.get());
         return curriculumOpt.orElse(null);
     }
