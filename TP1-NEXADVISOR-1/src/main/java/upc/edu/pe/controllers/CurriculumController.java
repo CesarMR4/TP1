@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,10 +33,8 @@ public class CurriculumController {
 
     @PostMapping(value = "/analizar/{idReserva}", consumes = MediaType.TEXT_PLAIN_VALUE)
     public String subirYAnalizarCurriculum(@PathVariable int idReserva, @RequestBody String textoCurriculum) {
-        Optional<Reserva> reservaOpt = reservaService.list()
-                .stream()
-                .filter(r -> r.getId() == idReserva)
-                .findFirst();
+        Optional<Reserva> reservaOpt = reservaService.buscarPorId(idReserva);  
+
 
         if (!reservaOpt.isPresent()) {
             return "{\"error\": \"Reserva no encontrada\"}";
@@ -50,20 +47,16 @@ public class CurriculumController {
         Curriculum curriculumAnalizado = new Curriculum(textoCurriculum, reporteIA, reserva);
         curriculumService.guardarCurriculumAnalizado(curriculumAnalizado);
 
-
         return reporteIA;
     }
 
 
     @GetMapping("/reporte/{idReserva}")
     public Curriculum obtenerReportePorReserva(@PathVariable int idReserva) {
-        Optional<Reserva> reservaOpt = reservaService.list()
-                .stream()
-                .filter(r -> r.getId() == idReserva)
-                .findFirst();
+        Optional<Reserva> reservaOpt = reservaService.buscarPorId(idReserva);  // Cambio aquí
 
         if (!reservaOpt.isPresent()) {
-            return null; 
+            return null;
         }
 
         Optional<Curriculum> curriculumOpt = curriculumService.buscarPorReserva(reservaOpt.get());

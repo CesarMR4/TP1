@@ -70,4 +70,10 @@ public class ReservaServiceImpl implements ReservaService{
 	    return reservaRepository.findByAsesorId(idAsesor);
 	}
 
+	@Override
+	public Optional<Reserva> buscarPorId(int id) {
+		// TODO Auto-generated method stub
+		 return reservaRepository.findById(id);
+	}
+
 }

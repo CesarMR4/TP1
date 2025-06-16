@@ -33,8 +33,7 @@ public class CurriculumServiceImpl implements CurriculumService {
 
 	@Override
 	public Optional<Curriculum> buscarPorReserva(Reserva reserva) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return curriculumRepository.findByReserva(reserva);
 	}
 
 }
