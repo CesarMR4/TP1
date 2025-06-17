@@ -15,9 +15,10 @@ public class Puntuacion {
 
     @Column(length = 500)
     private String comentario;
+   
 
     @ManyToOne
-    @JoinColumn(name = "id_Asesor", nullable = false)
+    @JoinColumn(name = "id_asesor", nullable = false)
     private Asesor asesor;
 
 	public Puntuacion() {

@@ -19,8 +19,8 @@ public class Curriculum {
     private int id;
 
     @Lob
-    @Column(name = "texto_curriculum", nullable = false)
-    private String textoCurriculum;  
+    @Column(name = "texto_curriculum", nullable = false, columnDefinition = "bytea")
+    private byte[] textoCurriculum;
 
     @Lob
     @Column(name = "reporte_ia", nullable = false, columnDefinition = "TEXT")
@@ -35,7 +35,7 @@ public class Curriculum {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Curriculum(String textoCurriculum, String reporteIA, Reserva reserva) {
+	public Curriculum(byte[] textoCurriculum, String reporteIA, Reserva reserva) {
 		super();
 		this.textoCurriculum = textoCurriculum;
 		this.reporteIA = reporteIA;
@@ -50,11 +50,11 @@ public class Curriculum {
 		this.id = id;
 	}
 
-	public String getTextoCurriculum() {
+	public byte[] getTextoCurriculum() {
 		return textoCurriculum;
 	}
 
-	public void setTextoCurriculum(String textoCurriculum) {
+	public void setTextoCurriculum(byte[] textoCurriculum) {
 		this.textoCurriculum = textoCurriculum;
 	}
 

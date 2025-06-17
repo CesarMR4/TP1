@@ -18,7 +18,6 @@ public class Comentario {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
 	 private int id;
-
 	 @Column(name = "contenido", nullable = false)
 	 private String contenido;
 	 @Column(name = "fechacreacion", nullable = false)
@@ -26,18 +25,21 @@ public class Comentario {
 	 @ManyToOne
 	 @JoinColumn(name = "estudiante_id", referencedColumnName = "id_Estudiante", nullable = false)
 	 private Estudiante estudiante;
-
+	 @ManyToOne
+	 @JoinColumn(name = "id_asesor", referencedColumnName = "id_asesor") // 👈 clave
+	 private Asesor asesor;
 	public Comentario() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Comentario(int id, String contenido, Date fechacreacion, Estudiante estudiante) {
+	public Comentario(int id, String contenido, Date fechacreacion, Estudiante estudiante, Asesor asesor) {
 		super();
 		this.id = id;
 		this.contenido = contenido;
 		this.fechacreacion = fechacreacion;
 		this.estudiante = estudiante;
+		this.asesor = asesor;
 	}
 
 	public int getId() {
@@ -71,6 +73,13 @@ public class Comentario {
 
 	public void setEstudiante(Estudiante estudiante) {
 		this.estudiante = estudiante;
+	}
+	public Asesor getAsesor() {
+	    return asesor;
+	}
+
+	public void setAsesor(Asesor asesor) {
+	    this.asesor = asesor;
 	}
 	
 	 

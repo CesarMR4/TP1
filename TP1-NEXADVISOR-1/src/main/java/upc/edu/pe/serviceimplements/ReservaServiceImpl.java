@@ -23,7 +23,7 @@ public class ReservaServiceImpl implements ReservaService{
 	public void insert(Reserva reserva) {
 		// TODO Auto-generated method stub
 		 reservaRepository.save(reserva);
-		 int idAsesor = reserva.getAsesor().getId_Asesor(); 
+		 int idAsesor = reserva.getAsesor().getId(); 
 		 String mensaje = "Se ha registrado una nueva reserva.";
 		 notificacionController.notificarReserva(idAsesor, mensaje);
 	}
@@ -61,8 +61,8 @@ public class ReservaServiceImpl implements ReservaService{
 
 
 	@Override
-	public List<Reserva> listarPorEstudiante(int idEstudiante) {
-		return reservaRepository.findByEstudianteId(idEstudiante);
+	public List<Reserva> listarPorEstudiante(int id) {
+		return reservaRepository.findByEstudiante_Id(id);
 
 	}
 	@Override

@@ -50,7 +50,7 @@ public class AsesorController {
 
  @PutMapping("/{id}")
  public void actualizar(@PathVariable("id") Integer idAsesor, @RequestBody Asesor asesor) {
-     asesor.setId_Asesor(idAsesor);
+     asesor.setId(idAsesor);
      aService.update(asesor);
  }
  

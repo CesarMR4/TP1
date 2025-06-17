@@ -39,8 +39,8 @@ public class ComentarioServiceImpl implements ComentarioService{
 		return null;
 	}
 	@Override
-	public List<Comentario> listarPorAsesor(int idAsesor) {
-	    return comentarioRepository.findByAsesorId(idAsesor);
+	public List<Comentario> listarPorAsesor(int id) {
+	    return comentarioRepository.findByAsesor_Id(id);
 	}
 
 

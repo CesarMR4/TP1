@@ -27,7 +27,7 @@ public class PuntuacionServiceImpl implements PuntuacionService {
 
     @Override
     public List<Puntuacion> listarPorAsesor(int idAsesor) {
-        return pRepo.findByAsesorId_Asesor(idAsesor);
+        return pRepo.findByAsesorId(idAsesor);
     }
 
     @Override

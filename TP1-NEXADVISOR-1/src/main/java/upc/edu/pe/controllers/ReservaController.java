@@ -30,7 +30,7 @@ public class ReservaController {
     public void registrarReserva(@RequestBody Reserva reserva) {
         reservaService.insert(reserva);
      
-        int idAsesor = reserva.getAsesor().getId_Asesor();;   
+        int idAsesor = reserva.getAsesor().getId();;   
         String mensaje = "Nuevo estudiante ha realizado una reserva.";
         notificacionController.notificarReserva(idAsesor, mensaje);
         

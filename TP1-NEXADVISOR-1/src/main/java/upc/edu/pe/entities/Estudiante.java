@@ -20,7 +20,8 @@ public class Estudiante {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_Estudiante;
+	@Column(name = "id_estudiante")
+	private int id;
 	@Column(name = "nombre", nullable = false, length = 25)
 	private String nombre;
 	@Column(name = "email", nullable = false, length = 25)
@@ -32,8 +33,8 @@ public class Estudiante {
 	@Column(name = "telefono", nullable = false, length = 15)
 	private String telefono;
 	@Lob
-	@Column(name = "curriculum", nullable = false, length = 25)
-	private String curriculum;
+	@Column(name = "curriculum", nullable = false)
+	private byte[] curriculum;
 	@Column(name = "carrera", nullable = false, length = 25)
 	private String carrera;
 	@Column(name = "fechaRegistro", nullable = true, length = 25)
@@ -46,9 +47,9 @@ public class Estudiante {
 		super();
 	}
 	 public Estudiante(int id_Estudiante, String nombre,String email, String password, String direccion, 
-			 String telefono, String curriculum, String carrera, Date fechaRegistro, String rol) {
+			 String telefono, byte[] curriculum, String carrera, Date fechaRegistro, String rol) {
 	         
-		 this.id_Estudiante = id_Estudiante;
+		 this.id = id_Estudiante;
 		 this.nombre = nombre;
 		 this.email = email;
 		 this.password = password;
@@ -60,11 +61,11 @@ public class Estudiante {
 		 this.rol = rol;
 	    }
 	  public int getIdEstudiante() {
-	        return id_Estudiante;
+	        return id;
 	    }
 
 	    public void setIdEstudiante(int id_Estudiante) {
-	        this.id_Estudiante = id_Estudiante;
+	        this.id = id_Estudiante;
 	    }
 	    public String getNombre () {
 	        return nombre;
@@ -96,12 +97,14 @@ public class Estudiante {
 	    public void setTelefono(String telefono) {
 	        this.telefono = telefono;
 	    }
-	    public String getCurriculum () {
+	    public byte[] getCurriculum() {
 	        return curriculum;
 	    }
-	    public void setCurriculum(String curriculum) {
+
+	    public void setCurriculum(byte[] curriculum) {
 	        this.curriculum = curriculum;
 	    }
+
 	    public String getCarrera () {
 	        return carrera;
 	    }

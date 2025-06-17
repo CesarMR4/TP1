@@ -1,10 +1,15 @@
 package upc.edu.pe.controllers;
 
+import java.awt.PageAttributes.MediaType;
+import java.io.IOException;
+import java.net.http.HttpHeaders;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import upc.edu.pe.entities.Estudiante;
 import upc.edu.pe.entities.Auxiliar;
@@ -68,6 +75,36 @@ public class EstudianteController {
 	         return "Correo no encontrado.";
 	     }
 	 }
-	   
+
+@PostMapping("/registro-con-cv")
+public ResponseEntity<String> registrarConCurriculum(
+    @RequestParam("nombre") String nombre,
+    @RequestParam("email") String email,
+    @RequestParam("contrasena") String contrasena,
+    @RequestParam("direccion") String direccion,
+    @RequestParam("telefono") String telefono,
+    @RequestParam("carrera") String carrera,
+    @RequestParam("curriculum") MultipartFile file
+) {
+    try {
+        Estudiante estudiante = new Estudiante();
+        estudiante.setNombre(nombre);
+        estudiante.setEmail(email);
+        estudiante.setPassword(contrasena);
+        estudiante.setDireccion(direccion);
+        estudiante.setTelefono(telefono);
+        estudiante.setCarrera(carrera);
+        estudiante.setFecha_Registro(new Date());
+        estudiante.setRol("estudiante");
+        estudiante.setCurriculum(file.getBytes()); // importante
+
+        pService.insert(estudiante);
+
+        return ResponseEntity.ok("Estudiante registrado correctamente.");
+    } catch (IOException e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo.");
+    }
+}
+   
 
 }

@@ -1,6 +1,9 @@
 package upc.edu.pe.serviceimplements;
 
 
+import java.io.IOException;
+
+import org.apache.tika.Tika;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class AnalizadorTextoServiceImpl {
@@ -37,6 +41,17 @@ public class AnalizadorTextoServiceImpl {
             return "{\"error\": \"Error al analizar el texto\"}";
         }
     }
+
+    public String extraerTexto(MultipartFile archivo) {
+        try {
+            Tika tika = new Tika();
+            return tika.parseToString(archivo.getInputStream());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error al extraer el texto del archivo.";
+        }
+    }
+
 }
 
 

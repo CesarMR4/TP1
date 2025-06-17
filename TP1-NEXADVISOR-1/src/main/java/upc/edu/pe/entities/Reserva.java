@@ -27,10 +27,10 @@ public class Reserva {
     @Column(name = "comentario_asesor", length = 500)
     private String comentarioAsesor;
     @ManyToOne
-    @JoinColumn(name = "estudiante_id", referencedColumnName = "id_Estudiante", nullable = false)
+    @JoinColumn(name = "estudiante_id", referencedColumnName = "id_estudiante", nullable = false)
     private Estudiante estudiante;
     @ManyToOne
-    @JoinColumn(name = "asesor_id", referencedColumnName = "id_Asesor", nullable = false)
+    @JoinColumn(name = "asesor_id", referencedColumnName = "id_asesor", nullable = false)
     private Asesor asesor;
     
 	public Reserva() {

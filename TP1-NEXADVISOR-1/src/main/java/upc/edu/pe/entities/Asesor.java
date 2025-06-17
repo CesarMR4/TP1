@@ -18,7 +18,8 @@ public class Asesor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_Asesor;
+	@Column(name = "id_asesor") // mantienes el mapeo a la BD
+	private int id; // vuelve a llamarse 'id'
 	@Column(name = "nombre", nullable = false, length = 25)
     private String nombre;
 	@Column(name = "email", nullable = false, length = 25)
@@ -30,8 +31,8 @@ public class Asesor {
 	@Column(name = "telefono", nullable = false, length = 25)
     private String telefono;
 	@Lob
-	@Column(name = "curriculum", nullable = false, length = 25)
-    private String curriculum; 
+	@Column(name = "curriculum", nullable = false)
+	private byte[] curriculum;
 	@Column(name = "sector", nullable = false, length = 25)
     private String sector;
 	@Column(name = "carrera", nullable = false, length = 25)
@@ -42,11 +43,11 @@ public class Asesor {
 	@Column(name = "rol", nullable = false, length = 10)
     private String rol = "asesor";
 	
-	public int getId_Asesor() {
-		return id_Asesor;
+	public int getId() {
+		return id;
 	}
-	public void setId_Asesor(int id_Asesor) {
-		this.id_Asesor = id_Asesor;
+	public void setId(int id_Asesor) {
+		this.id = id_Asesor;
 	}
 	public String getNombre() {
 		return nombre;
@@ -78,10 +79,10 @@ public class Asesor {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public String getCurriculum() {
+	public byte[] getCurriculum() {
 		return curriculum;
 	}
-	public void setCurriculum(String curriculum) {
+	public void setCurriculum(byte[] curriculum) {
 		this.curriculum = curriculum;
 	}
 	public String getSector() {
@@ -113,9 +114,9 @@ public class Asesor {
 		// TODO Auto-generated constructor stub
 	}
 	public Asesor(int id_Asesor, String nombre, String email, String password, String direccion, String telefono,
-			String curriculum, String sector, String carrera, Date fechaRegistro, String rol) {
+			byte[] curriculum, String sector, String carrera, Date fechaRegistro, String rol) {
 		super();
-		this.id_Asesor = id_Asesor;
+		this.id = id_Asesor;
 		this.nombre = nombre;
 		this.email = email;
 		this.password = password;
