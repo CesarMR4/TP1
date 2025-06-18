@@ -75,7 +75,8 @@ public class EstudianteController {
 	         return "Correo no encontrado.";
 	     }
 	 }
-
+}
+/*
 @PostMapping("/registro-con-cv")
 public ResponseEntity<String> registrarConCurriculum(
     @RequestParam("nombre") String nombre,
@@ -108,3 +109,4 @@ public ResponseEntity<String> registrarConCurriculum(
    
 
 }
+*/

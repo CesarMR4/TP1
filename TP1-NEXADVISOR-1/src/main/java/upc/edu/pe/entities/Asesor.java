@@ -18,8 +18,8 @@ public class Asesor {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_asesor") // mantienes el mapeo a la BD
-	private int id; // vuelve a llamarse 'id'
+	@Column(name = "id_asesor") 
+	private int id; 
 	@Column(name = "nombre", nullable = false, length = 25)
     private String nombre;
 	@Column(name = "email", nullable = false, length = 25)

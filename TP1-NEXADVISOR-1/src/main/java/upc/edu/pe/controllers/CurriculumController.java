@@ -1,9 +1,11 @@
 package upc.edu.pe.controllers;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,11 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lowagie.text.Document;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.pdf.PdfWriter;
+
 import upc.edu.pe.entities.Curriculum;
 import upc.edu.pe.entities.Reserva;
 import upc.edu.pe.serviceimplements.AnalizadorTextoServiceImpl;
 import upc.edu.pe.serviceinterface.CurriculumService;
 import upc.edu.pe.serviceinterface.ReservaService;
+
 
 @RestController
 @RequestMapping("/curriculum")
@@ -46,10 +53,10 @@ public class CurriculumController {
 
         Reserva reserva = reservaOpt.get();
 
-        String textoExtraido = ""; // Esto debe ser el resultado de extraer texto del archivo PDF/DOCX
+        String textoExtraido = ""; 
         try {
-            // Aquí deberías tener un método que extrae el texto del archivo
-            textoExtraido = analizadorTextoService.extraerTexto(archivo); // Ejemplo
+          
+            textoExtraido = analizadorTextoService.extraerTexto(archivo); 
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("{\"error\": \"No se pudo extraer el texto\"}");
         }
@@ -58,7 +65,7 @@ public class CurriculumController {
 
         try {
             Curriculum curriculumAnalizado = new Curriculum();
-            curriculumAnalizado.setTextoCurriculum(archivo.getBytes()); // Guarda el archivo
+            curriculumAnalizado.setTextoCurriculum(archivo.getBytes()); 
             curriculumAnalizado.setReporteIA(reporteIA);
             curriculumAnalizado.setReserva(reserva);
 
@@ -80,4 +87,84 @@ public class CurriculumController {
         Optional<Curriculum> curriculumOpt = curriculumService.buscarPorReserva(reservaOpt.get());
         return curriculumOpt.orElse(null);
     }
+    @GetMapping(value = "/reporte/pdf/{idReserva}", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<byte[]> generarReportePdf(@PathVariable int idReserva) {
+        Optional<Reserva> reservaOpt = reservaService.buscarPorId(idReserva);
+        if (!reservaOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Optional<Curriculum> curriculumOpt = curriculumService.buscarPorReserva(reservaOpt.get());
+        if (!curriculumOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        String reporte = curriculumOpt.get().getReporteIA();
+
+        try {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            Document document = new Document();
+            PdfWriter.getInstance(document, baos);
+            document.open();
+
+            document.add(new Paragraph("Reporte de análisis del currículum"));
+            document.add(new Paragraph(" "));
+            document.add(new Paragraph(reporte));
+
+            document.close();
+
+            byte[] pdfBytes = baos.toByteArray();
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .header("Content-Disposition", "attachment; filename=reporte_curriculum.pdf")
+                    .body(pdfBytes);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+    @GetMapping("/reporte/{idReserva}/pdf")
+    public ResponseEntity<byte[]> descargarReportePDF(@PathVariable int idReserva) {
+        Optional<Reserva> reservaOpt = reservaService.buscarPorId(idReserva);
+        if (!reservaOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Optional<Curriculum> curriculumOpt = curriculumService.buscarPorReserva(reservaOpt.get());
+        if (!curriculumOpt.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Curriculum curriculum = curriculumOpt.get();
+
+        try {
+            // Crear PDF con el reporteIA
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            Document document = new Document();
+            PdfWriter.getInstance(document, baos);
+            document.open();
+            document.add(new Paragraph("Reporte generado por IA sobre el currículum:\n\n"));
+            document.add(new Paragraph(curriculum.getReporteIA()));
+            document.close();
+
+            byte[] pdfBytes = baos.toByteArray();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", "reporte_curriculum.pdf");
+
+            return ResponseEntity
+                    .ok()
+                    .headers(headers)
+                    .body(pdfBytes);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body(null);
+        }
+    }
+
 }

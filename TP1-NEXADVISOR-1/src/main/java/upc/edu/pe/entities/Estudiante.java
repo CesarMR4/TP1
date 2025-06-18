@@ -33,7 +33,7 @@ public class Estudiante {
 	@Column(name = "telefono", nullable = false, length = 15)
 	private String telefono;
 	@Lob
-	@Column(name = "curriculum", nullable = false)
+	@Column(name = "curriculum", nullable = true)
 	private byte[] curriculum;
 	@Column(name = "carrera", nullable = false, length = 25)
 	private String carrera;

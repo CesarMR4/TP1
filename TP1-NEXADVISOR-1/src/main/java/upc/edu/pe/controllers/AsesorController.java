@@ -1,5 +1,6 @@
 package upc.edu.pe.controllers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import upc.edu.pe.entities.Asesor;
 import upc.edu.pe.entities.Auxiliar;
@@ -30,16 +33,37 @@ public class AsesorController {
 	private AsesorService aService;
 	
 	
-	  @PostMapping("/registrar")
-	    public ResponseEntity<String> registrarAsesor(@RequestBody Asesor asesor) {
-	        try {
-	            // Insertar el asesor en la base de datos
-	            aService.insert(asesor);
-	            return new ResponseEntity<>("Asesor registrado exitosamente.", HttpStatus.CREATED);
-	        } catch (Exception e) {
-	            return new ResponseEntity<>("Error al registrar el asesor.", HttpStatus.INTERNAL_SERVER_ERROR);
-	        }
+	@PostMapping("/registrar")
+	public ResponseEntity<String> registrarAsesor(
+	        @RequestParam("nombre") String nombre,
+	        @RequestParam("email") String email,
+	        @RequestParam("password") String password,
+	        @RequestParam("direccion") String direccion,
+	        @RequestParam("telefono") String telefono,
+	        @RequestParam("sector") String sector,
+	        @RequestParam("carrera") String carrera,
+	        @RequestParam("curriculum") MultipartFile file) {
+	    try {
+	        Asesor asesor = new Asesor();
+	        asesor.setNombre(nombre);
+	        asesor.setEmail(email);
+	        asesor.setPassword(password);
+	        asesor.setDireccion(direccion);
+	        asesor.setTelefono(telefono);
+	        asesor.setSector(sector);
+	        asesor.setCarrera(carrera);
+	        asesor.setCurriculum(file.getBytes());
+	        asesor.setFechaRegistro(new Date()); 
+	        asesor.setRol("asesor");
+
+	        aService.insert(asesor);
+	        return new ResponseEntity<>("Asesor registrado exitosamente.", HttpStatus.CREATED);
+	    } catch (Exception e) {
+	        return new ResponseEntity<>("Error al registrar el asesor.", HttpStatus.INTERNAL_SERVER_ERROR);
 	    }
+	}
+	
+	
  @GetMapping
     public List<Asesor> listar(){
         return aService.list();
@@ -91,8 +115,25 @@ public class AsesorController {
          return "Correo no encontrado.";
      }
  }
-}
+
 		
+@GetMapping("/{id}/curriculum")
+public ResponseEntity<byte[]> descargarCurriculum(@PathVariable("id") Integer id) {
+    Optional<Asesor> asesorOpt = aService.listId(id);
+
+    if (asesorOpt.isPresent()) {
+        Asesor asesor = asesorOpt.get();
+        byte[] archivo = asesor.getCurriculum();
+
+        return ResponseEntity.ok()
+                .header("Content-Disposition", "attachment; filename=\"curriculum_" + asesor.getNombre() + ".pdf\"")
+                .contentType(org.springframework.http.MediaType.APPLICATION_PDF)
+                .body(archivo);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
+}
 		
 
 	
