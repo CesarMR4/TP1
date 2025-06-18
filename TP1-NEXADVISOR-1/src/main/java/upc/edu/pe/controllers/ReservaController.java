@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import upc.edu.pe.entities.Historial;
 import upc.edu.pe.entities.Reserva;
+import upc.edu.pe.serviceinterface.HistorialService;
 import upc.edu.pe.serviceinterface.ReservaService;
 
 @RestController
@@ -24,18 +26,30 @@ public class ReservaController {
     private ReservaService reservaService;
     @Autowired
     private NotificacionController notificacionController;
+    @Autowired
+    private HistorialService historialService;
 
 
     @PostMapping
     public void registrarReserva(@RequestBody Reserva reserva) {
+    	 // Guardar la reserva
         reservaService.insert(reserva);
-     
-        int idAsesor = reserva.getAsesor().getId();;   
+
+        // Notificar al asesor
+        int idAsesor = reserva.getAsesor().getId();   
         String mensaje = "Nuevo estudiante ha realizado una reserva.";
         notificacionController.notificarReserva(idAsesor, mensaje);
-        
-    }
 
+        // Crear historial automáticamente
+        Historial historial = new Historial();
+        historial.setDescripcion("Reserva con el asesor " + reserva.getAsesor().getNombre());
+        historial.setFecha(new java.util.Date());
+        historial.setEstudiante(reserva.getEstudiante());
+        historial.setAsesor(reserva.getAsesor());
+
+        historialService.insert(historial); // <<--- REGISTRO AUTOMÁTICO
+    }
+    
     @GetMapping
     public List<Reserva> listarReservas() {
         return reservaService.list();
