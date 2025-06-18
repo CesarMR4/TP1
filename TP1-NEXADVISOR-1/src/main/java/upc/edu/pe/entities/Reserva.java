@@ -32,6 +32,8 @@ public class Reserva {
     @ManyToOne
     @JoinColumn(name = "asesor_id", referencedColumnName = "id_asesor", nullable = false)
     private Asesor asesor;
+    @Column(name = "puntuacion")
+    private Integer puntuacion;
     
 	public Reserva() {
 		super();
@@ -39,12 +41,13 @@ public class Reserva {
 	}
 
 	public Reserva(int id, Date fechaReserva, String horaReserva, String estado, String comentarioAsesor,
-			Estudiante estudiante, Asesor asesor) {
+			int puntuacion, Estudiante estudiante, Asesor asesor) {
 		super();
 		this.id = id;
 		this.fechaReserva = fechaReserva;
 		this.horaReserva = horaReserva;
 		this.estado = estado;
+		this.puntuacion = puntuacion;
 		this.comentarioAsesor = comentarioAsesor;
 		this.estudiante = estudiante;
 		this.asesor = asesor;
@@ -56,6 +59,13 @@ public class Reserva {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	public int getPuntuacion() {
+		return puntuacion;
+	}
+
+	public void setPuntuacion(int puntuacion) {
+		this.puntuacion = puntuacion;
 	}
 
 	public Date getFechaReserva() {
