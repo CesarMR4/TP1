@@ -37,7 +37,7 @@ public class ComentarioController {
         if (comentarioExistente == null) {
             throw new RuntimeException("Comentario no encontrado");
         }
-        if (comentarioExistente.getEstudiante().getIdEstudiante() != estudianteId) {
+        if (comentarioExistente.getEstudiante().getId() != estudianteId) {
             throw new RuntimeException("No puedes eliminar este comentario");
         }
         comentarioService.delete(id);
@@ -49,7 +49,7 @@ public class ComentarioController {
         if (comentarioExistente == null) {
             throw new RuntimeException("Comentario no encontrado");
         }
-        if (comentarioExistente.getEstudiante().getIdEstudiante() != estudianteId) {
+        if (comentarioExistente.getEstudiante().getId() != estudianteId) {
             throw new RuntimeException("No puedes editar este comentario");
         }
         comentario.setId(id);

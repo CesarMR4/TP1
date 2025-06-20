@@ -32,9 +32,9 @@ public class Estudiante {
 	private String direccion;
 	@Column(name = "telefono", nullable = false, length = 15)
 	private String telefono;
-	@Lob
-	@Column(name = "curriculum", nullable = true)
-	private byte[] curriculum;
+	//@Lob
+	//@Column(name = "curriculum", nullable = true)
+	//private byte[] curriculum;
 	@Column(name = "carrera", nullable = false, length = 25)
 	private String carrera;
 	@Column(name = "fechaRegistro", nullable = true, length = 25)
@@ -47,7 +47,7 @@ public class Estudiante {
 		super();
 	}
 	 public Estudiante(int id_Estudiante, String nombre,String email, String password, String direccion, 
-			 String telefono, byte[] curriculum, String carrera, Date fechaRegistro, String rol) {
+			 String telefono, String carrera, Date fechaRegistro, String rol) {
 	         
 		 this.id = id_Estudiante;
 		 this.nombre = nombre;
@@ -55,18 +55,18 @@ public class Estudiante {
 		 this.password = password;
 		 this.direccion = direccion;
 		 this.telefono = telefono;
-		 this.curriculum = curriculum;
+		 //this.curriculum = curriculum;
 		 this.carrera = carrera;
 		 this.fechaRegistro = fechaRegistro;
 		 this.rol = rol;
 	    }
-	  public int getIdEstudiante() {
-	        return id;
-	    }
+	 	public int getId() {
+		    return id;
+		}
 
-	    public void setIdEstudiante(int id_Estudiante) {
-	        this.id = id_Estudiante;
-	    }
+		public void setId(int id) {
+		    this.id = id;
+		}
 	    public String getNombre () {
 	        return nombre;
 	    }
@@ -97,14 +97,14 @@ public class Estudiante {
 	    public void setTelefono(String telefono) {
 	        this.telefono = telefono;
 	    }
-	    public byte[] getCurriculum() {
+	    /*public byte[] getCurriculum() {
 	        return curriculum;
 	    }
 
 	    public void setCurriculum(byte[] curriculum) {
 	        this.curriculum = curriculum;
 	    }
-
+*/
 	    public String getCarrera () {
 	        return carrera;
 	    }

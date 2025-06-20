@@ -36,7 +36,7 @@ public class RespuestaController {
 	     if (respuestaExistente == null) {
 	         throw new RuntimeException("Respuesta no encontrada");
 	     }
-	     if (respuestaExistente.getEstudiante().getIdEstudiante() != estudianteId) {
+	     if (respuestaExistente.getEstudiante().getId() != estudianteId) {
 	         throw new RuntimeException("No puedes editar esta respuesta");
 	     }
 	     fService.update(respuesta);

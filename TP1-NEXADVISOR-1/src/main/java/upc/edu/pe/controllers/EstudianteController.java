@@ -51,7 +51,7 @@ public class EstudianteController {
 	 }
 	 @PutMapping("/{id}")
 	 public void actualizar(@PathVariable("id") Integer idEstudiante, @RequestBody Estudiante estudiante) {  
-	     estudiante.setIdEstudiante(idEstudiante);
+	     estudiante.setId(idEstudiante);
 	       pService.update(estudiante);
 	    }
 	 @PostMapping("/login/estudiante")
