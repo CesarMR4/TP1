@@ -2,6 +2,11 @@ package upc.edu.pe.entities;
 
 import java.util.Date;
 
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +16,7 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+
 
 @Entity
 @Table(name = "Asesor")
@@ -37,12 +43,12 @@ public class Asesor {
 	@Column(name = "curriculum", nullable = false)
 	private byte[] curriculum;
 	*/
-	
-	@Lob
-	@Column(name = "curriculum", nullable = false)
-	private byte[] curriculum;
 	@Column(name = "sector", nullable = false, length = 25)
     private String sector;
+	@Lob
+	@JdbcTypeCode(SqlTypes.BINARY)
+	@Column(name = "curriculum")
+	private byte[] curriculum;
 	@Column(name = "carrera", nullable = false, length = 25)
     private String carrera;
 	@Column(name = "fecharegistro", nullable = false, length = 25)

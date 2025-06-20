@@ -32,9 +32,9 @@ public class Estudiante {
 	private String direccion;
 	@Column(name = "telefono", nullable = false, length = 15)
 	private String telefono;
-	//@Lob
-	//@Column(name = "curriculum", nullable = true)
-	//private byte[] curriculum;
+	@Lob
+	@Column(name = "curriculum_estudiante", nullable = true)
+	private byte[] curriculum;
 	@Column(name = "carrera", nullable = false, length = 25)
 	private String carrera;
 	@Column(name = "fechaRegistro", nullable = true, length = 25)
@@ -97,14 +97,14 @@ public class Estudiante {
 	    public void setTelefono(String telefono) {
 	        this.telefono = telefono;
 	    }
-	    /*public byte[] getCurriculum() {
+	    public byte[] getCurriculum() {
 	        return curriculum;
 	    }
 
 	    public void setCurriculum(byte[] curriculum) {
 	        this.curriculum = curriculum;
 	    }
-*/
+
 	    public String getCarrera () {
 	        return carrera;
 	    }
