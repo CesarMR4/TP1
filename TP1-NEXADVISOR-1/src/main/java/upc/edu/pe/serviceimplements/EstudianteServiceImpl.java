@@ -1,5 +1,6 @@
 package upc.edu.pe.serviceimplements;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,10 @@ public class EstudianteServiceImpl implements EstudianteService {
 	
 	@Override 
 	public void insert(Estudiante estudiante) {
-		estudianteRepository.save(estudiante);
+	    if (estudiante.getFechaRegistro() == null) {
+	        estudiante.setFechaRegistro(new Date());
+	    }
+	    estudianteRepository.save(estudiante);
 	}
 	@Override
 	 public List<Estudiante> list() {

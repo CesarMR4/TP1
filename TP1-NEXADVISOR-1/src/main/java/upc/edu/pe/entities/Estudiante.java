@@ -111,10 +111,10 @@ public class Estudiante {
 	    public void setCarrera(String carrera) {
 	        this.carrera = carrera;
 	    }
-	    public Date getFecha_Registro () {
+	    public Date getFechaRegistro () {
 	        return fechaRegistro;
 	    }
-	    public void setFecha_Registro(Date fechaRegistro) {
+	    public void setFechaRegistro(Date fechaRegistro) {
 	        this.fechaRegistro = fechaRegistro;
 	    }
 	    public String getRol () {
