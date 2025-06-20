@@ -4,6 +4,9 @@ package upc.edu.pe.entities;
 
 import java.util.Date;
 
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,6 +36,7 @@ public class Estudiante {
 	@Column(name = "telefono", nullable = false, length = 15)
 	private String telefono;
 	@Lob
+	@JdbcTypeCode(SqlTypes.BINARY)
 	@Column(name = "curriculum_estudiante", nullable = true)
 	private byte[] curriculum;
 	@Column(name = "carrera", nullable = false, length = 25)
