@@ -13,5 +13,6 @@ public interface RespuestaService {
 	   public void delete(int id);
 	   public void update(Respuesta respuesta);
 	   public Respuesta findById(int id);
+	   List<Respuesta> listarPorComentario(int idComentario);
 
 }

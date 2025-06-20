@@ -30,6 +30,14 @@ public class Asesor {
     private String direccion;
 	@Column(name = "telefono", nullable = false, length = 25)
     private String telefono;
+
+	/*
+	 * @JsonIgnore
+	@Lob
+	@Column(name = "curriculum", nullable = false)
+	private byte[] curriculum;
+	*/
+	
 	@Lob
 	@Column(name = "curriculum", nullable = false)
 	private byte[] curriculum;

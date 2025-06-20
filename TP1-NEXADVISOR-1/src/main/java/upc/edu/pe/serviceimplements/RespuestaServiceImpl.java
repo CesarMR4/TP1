@@ -42,8 +42,12 @@ public class RespuestaServiceImpl implements RespuestaService{
 
 	@Override
 	public Respuesta findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	    return respuestaRespository.findById(id).orElse(null);
+	}
+
+	@Override
+	public List<Respuesta> listarPorComentario(int idComentario) {
+	    return respuestaRespository.findByComentario_Id(idComentario);
 	}
 
 }

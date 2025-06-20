@@ -3,7 +3,9 @@ package upc.edu.pe.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,9 +24,18 @@ public class RespuestaController {
 	private RespuestaService fService;
 	
 	@PostMapping
-    public void registrar(@RequestBody Respuesta r){
-        fService.insert(r);
-    }
+	public ResponseEntity<String> registrar(@RequestBody Respuesta r){
+	    try {
+	        fService.insert(r);
+	        return ResponseEntity.ok("Respuesta registrada");
+	    } catch (Exception e) {
+	        return ResponseEntity.status(500).body("Error: " + e.getMessage());
+	    }
+	}
+	@GetMapping("/comentario/{id}")
+	public List<Respuesta> listarPorComentario(@PathVariable("id") int idComentario) {
+	    return fService.listarPorComentario(idComentario);
+	}
 	
 	 @GetMapping
 	    public List<Respuesta> listar(){

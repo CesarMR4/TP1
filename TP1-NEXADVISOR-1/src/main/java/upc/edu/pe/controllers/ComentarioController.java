@@ -3,6 +3,8 @@ package upc.edu.pe.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,15 +34,16 @@ public class ComentarioController {
 
   
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable("id") int id, @RequestHeader("X-User-Id") int estudianteId) {
+    public ResponseEntity<?> eliminar(@PathVariable("id") int id, @RequestHeader("X-User-Id") int estudianteId) {
         Comentario comentarioExistente = comentarioService.findById(id);
         if (comentarioExistente == null) {
-            throw new RuntimeException("Comentario no encontrado");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Comentario no encontrado");
         }
         if (comentarioExistente.getEstudiante().getId() != estudianteId) {
-            throw new RuntimeException("No puedes eliminar este comentario");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No puedes eliminar este comentario");
         }
         comentarioService.delete(id);
+        return ResponseEntity.ok().body("Comentario eliminado correctamente");
     }
 
     @PutMapping("/{id}")

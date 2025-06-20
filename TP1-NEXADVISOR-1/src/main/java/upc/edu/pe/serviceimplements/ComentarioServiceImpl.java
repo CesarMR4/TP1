@@ -35,9 +35,9 @@ public class ComentarioServiceImpl implements ComentarioService{
 
 	@Override
 	public Comentario findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	    return comentarioRepository.findById(id).orElse(null);
 	}
+
 	@Override
 	public List<Comentario> listarPorAsesor(int id) {
 	    return comentarioRepository.findByAsesor_Id(id);
