@@ -29,10 +29,11 @@ public class HorarioController {
     private HorarioService pService;
 	
 
-    @PostMapping
-    public void registrar(@RequestBody Horario h) {
-        pService.insert(h);
-    }
+	@PostMapping
+	public void registrar(@RequestBody Horario h) {
+	    System.out.println("Recibido horario para asesor con ID: " + h.getAsesor().getId());
+	    pService.insert(h);
+	}
 
 
     @GetMapping

@@ -20,60 +20,71 @@ public class Horario {
 	private int id;
     @Column(name = "Dia", nullable = false)
     private int dia;
-    @Column(name = "horaInicio", nullable = false)
-    private Date Hora_inicio;
-    @Column(name = "horaFin", nullable = false)
-    private Date Hora_fin;
+    @Column(name = "hora_inicio", nullable = false)
+    private String horaInicio;
+    @Column(name = "hora_fin", nullable = false)
+    private String horaFin;
+
     // DUDA
     @ManyToOne
     @JoinColumn(name = "asesor_id", referencedColumnName = "id_Asesor", nullable = false)
     private Asesor asesor;
-    
-    public Horario ()
-    {
+
+	public Horario() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-    
-    public Horario (int id, int dia, Date Hora_inicio, Date Hora_fin, Asesor asesor) {
-    	super();
-    	this.id = id;
-    	this.dia = dia;
-    	this.Hora_inicio = Hora_inicio;
-    	this.Hora_fin = Hora_fin;
-    	this.asesor = asesor;
-    }
-    public int getId() {	
-    	return id;
-    }
-    public void setId(int id) {
+
+	public Horario(int id, int dia, String horaInicio, String horaFin, Asesor asesor) {
+		super();
+		this.id = id;
+		this.dia = dia;
+		this.horaInicio = horaInicio;
+		this.horaFin = horaFin;
+		this.asesor = asesor;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
 		this.id = id;
 	}
-    public int getDia()
-    {	
-    	return dia;
-    }
-    public void setDia(int dia) {
+
+	public int getDia() {
+		return dia;
+	}
+
+	public void setDia(int dia) {
 		this.dia = dia;
 	}
-    public Date getHoraInicio() {
-    	return Hora_inicio;
-    }
-    public void setHoraInicio(Date Hora_inicio) {
-    	this.Hora_inicio = Hora_inicio;
-    }
-    public Date getHoraFin() {
-    	return Hora_fin;
-    }
-    public void setHoraFin(Date Hora_fin) {
-    	this.Hora_fin= Hora_fin;
-    }
-    public Asesor getAsesor() {
+
+	public String getHoraInicio() {
+		return horaInicio;
+	}
+
+	public void setHoraInicio(String horaInicio) {
+		this.horaInicio = horaInicio;
+	}
+
+	public String getHoraFin() {
+		return horaFin;
+	}
+
+	public void setHoraFin(String horaFin) {
+		this.horaFin = horaFin;
+	}
+
+	public Asesor getAsesor() {
 		return asesor;
 	}
 
 	public void setAsesor(Asesor asesor) {
 		this.asesor = asesor;
-	} 
+	}
+    
+  
     
    
 	
