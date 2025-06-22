@@ -27,7 +27,7 @@ public class EstudianteController {
         try {
             estudiante.setFechaRegistro(new Date());
             estudiante.setRol("estudiante");
-            estudiante.setCurriculum(null); // desactivado por ahora
+            estudiante.setCurriculum(null); 
 
             pService.insert(estudiante);
 

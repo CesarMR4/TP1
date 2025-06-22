@@ -6,7 +6,7 @@ public class Auxiliar {
 	    private String nuevaPassword;
 	    private String numeroTelefonico;
 
-	    // Constructor vacío
+	   
 	    public Auxiliar () {
 	    }
 
