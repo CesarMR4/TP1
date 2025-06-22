@@ -19,7 +19,7 @@ import upc.edu.pe.entities.RespuestaForo;
 import upc.edu.pe.serviceinterface.RespuestaForoService;
 
 @RestController
-@RequestMapping("/respuesta")
+@RequestMapping("/respuesta-foro")
 public class RespuestaForoController {
 
     @Autowired
