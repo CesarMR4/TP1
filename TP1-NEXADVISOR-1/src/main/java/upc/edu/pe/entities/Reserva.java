@@ -53,7 +53,7 @@ public class Reserva {
 		this.asesor = asesor;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
