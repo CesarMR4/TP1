@@ -16,4 +16,5 @@ public interface AsesorRepository extends JpaRepository<Asesor, Integer>{
 	Optional<Asesor> findByEmailAndPassword(String email, String password);
 	Optional<Asesor> findByEmail(String email);
 	
+	
 }

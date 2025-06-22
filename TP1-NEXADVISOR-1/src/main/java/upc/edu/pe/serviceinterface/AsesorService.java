@@ -18,4 +18,5 @@ public interface AsesorService {
 	Optional<Asesor> login(String email, String password);
 	Optional<Asesor> findByEmail(String email);
 	void updatePassword(String email, String nuevaPassword);
+	
 }
