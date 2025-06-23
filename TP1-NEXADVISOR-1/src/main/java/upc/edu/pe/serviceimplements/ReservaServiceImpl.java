@@ -19,14 +19,17 @@ public class ReservaServiceImpl implements ReservaService{
     @Autowired
     private NotificacionController notificacionController;
 
-	@Override
-	public void insert(Reserva reserva) {
-		// TODO Auto-generated method stub
-		 reservaRepository.save(reserva);
-		 int idAsesor = reserva.getAsesor().getId(); 
-		 String mensaje = "Se ha registrado una nueva reserva.";
-		 notificacionController.notificarReserva(idAsesor, mensaje);
-	}
+    @Override
+    public void insert(Reserva reserva) {
+        // Forzar que se cree una nueva reserva
+        reserva.setId(0);
+
+        reservaRepository.save(reserva);
+
+        int idAsesor = reserva.getAsesor().getId();
+        String mensaje = "Se ha registrado una nueva reserva.";
+        notificacionController.notificarReserva(idAsesor, mensaje);
+    }
 
 	@Override
 	public List<Reserva> list() {

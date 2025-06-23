@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import upc.edu.pe.entities.Asesor;
+import upc.edu.pe.entities.Estudiante;
 import upc.edu.pe.entities.Historial;
 import upc.edu.pe.entities.Reserva;
 import upc.edu.pe.serviceinterface.HistorialService;
@@ -30,22 +32,32 @@ public class ReservaController {
     @Autowired
     private ReservaRepository reservaRepository;
 
-    // REGISTRAR RESERVA
+    // ✅ REGISTRAR RESERVA (CORREGIDO)
     @PostMapping
     public void registrarReserva(@RequestBody Reserva reserva) {
+        // Asegura que solo se utilicen los IDs para evitar duplicación
+        int idAsesor = reserva.getAsesor().getId();
+        Asesor asesor = new Asesor();
+        asesor.setId(idAsesor);
+        reserva.setAsesor(asesor);
+
+        int idEstudiante = reserva.getEstudiante().getId();
+        Estudiante estudiante = new Estudiante();
+        estudiante.setId(idEstudiante);
+        reserva.setEstudiante(estudiante);
+
         reservaService.insert(reserva);
 
         // Notificar al asesor
-        int idAsesor = reserva.getAsesor().getId();
         String mensaje = "Nuevo estudiante ha realizado una reserva.";
         notificacionController.notificarReserva(idAsesor, mensaje);
 
         // Registrar en historial
         Historial historial = new Historial();
-        historial.setDescripcion("Reserva con el asesor " + reserva.getAsesor().getNombre());
+        historial.setDescripcion("Reserva con el asesor " + idAsesor);
         historial.setFecha(new Date());
-        historial.setEstudiante(reserva.getEstudiante());
-        historial.setAsesor(reserva.getAsesor());
+        historial.setEstudiante(estudiante);
+        historial.setAsesor(asesor);
 
         historialService.insert(historial);
     }
@@ -93,7 +105,7 @@ public class ReservaController {
 
         if (optionalReserva.isPresent()) {
             Reserva reserva = optionalReserva.get();
-            reserva.setPuntuacion(puntuacion);	
+            reserva.setPuntuacion(puntuacion);
             reservaRepository.save(reserva);
             return ResponseEntity.ok(reserva);
         } else {
