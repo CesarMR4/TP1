@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import upc.edu.pe.dto.ReservaDTO;
 import upc.edu.pe.entities.Asesor;
 import upc.edu.pe.entities.Estudiante;
 import upc.edu.pe.entities.Historial;
@@ -94,8 +95,23 @@ public class ReservaController {
 
     // LISTAR RESERVAS POR ASESOR
     @GetMapping("/asesor/{id}")
-    public List<Reserva> listarPorAsesor(@PathVariable("id") int idAsesor) {
-        return reservaService.listarPorAsesor(idAsesor);
+    public List<ReservaDTO> listarPorAsesor(@PathVariable("id") int idAsesor) {
+        List<Reserva> reservas = reservaService.listarPorAsesor(idAsesor);
+
+        List<ReservaDTO> dtos = reservas.stream().map(reserva -> {
+            Estudiante estudiante = reserva.getEstudiante();
+            return new ReservaDTO(
+                reserva.getId(),
+                reserva.getEstado(),
+                reserva.getComentarioAsesor(),
+                reserva.getHoraReserva(),
+                reserva.getFechaReserva(),
+                estudiante != null ? estudiante.getId() : 0,
+                estudiante != null ? estudiante.getNombre() : "Desconocido"
+            );
+        }).toList();
+
+        return dtos;
     }
 
     // ACTUALIZAR PUNTUACIÓN DE RESERVA
