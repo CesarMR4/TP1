@@ -31,10 +31,12 @@ public class Reserva {
     private String comentarioAsesor;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "estudiante_id", referencedColumnName = "id_estudiante", nullable = false)
+    @JsonIgnoreProperties({"reservas"}) // ← importante si hay relación inversa
     private Estudiante estudiante;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "asesor_id", referencedColumnName = "id_asesor", nullable = false)
+    @JsonIgnoreProperties({"reservas"})
     private Asesor asesor;
     
     @Column(name = "puntuacion")

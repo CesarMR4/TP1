@@ -86,33 +86,33 @@ public class ReservaController {
     public void actualizarComentario(@PathVariable("id") Integer idReserva, @RequestBody String comentario) {
         reservaService.actualizarComentario(idReserva, comentario);
     }
-
+    
     // LISTAR RESERVAS POR ESTUDIANTE
     @GetMapping("/estudiante/{id}")
     public List<Reserva> listarPorEstudiante(@PathVariable("id") int idEstudiante) {
         return reservaService.listarPorEstudiante(idEstudiante);
     }
 
-    // LISTAR RESERVAS POR ASESOR
-    @GetMapping("/asesor/{id}")
-    public List<ReservaDTO> listarPorAsesor(@PathVariable("id") int idAsesor) {
-        List<Reserva> reservas = reservaService.listarPorAsesor(idAsesor);
-
-        List<ReservaDTO> dtos = reservas.stream().map(reserva -> {
-            Estudiante estudiante = reserva.getEstudiante();
-            return new ReservaDTO(
-                reserva.getId(),
-                reserva.getEstado(),
-                reserva.getComentarioAsesor(),
-                reserva.getHoraReserva(),
-                reserva.getFechaReserva(),
-                estudiante != null ? estudiante.getId() : 0,
-                estudiante != null ? estudiante.getNombre() : "Desconocido"
-            );
-        }).toList();
-
-        return dtos;
-    }
+	    // LISTAR RESERVAS POR ASESOR
+	    @GetMapping("/asesor/{id}")
+	    public List<ReservaDTO> listarPorAsesor(@PathVariable("id") int idAsesor) {
+	        List<Reserva> reservas = reservaService.listarPorAsesor(idAsesor);
+	
+	        List<ReservaDTO> dtos = reservas.stream().map(reserva -> {
+	            Estudiante estudiante = reserva.getEstudiante();
+	            return new ReservaDTO(
+	                reserva.getId(),
+	                reserva.getEstado(),
+	                reserva.getComentarioAsesor(),
+	                reserva.getHoraReserva(),
+	                reserva.getFechaReserva(),
+	                estudiante != null ? estudiante.getId() : 0,
+	                estudiante != null ? estudiante.getNombre() : "Desconocido"
+	            );
+	        }).toList();
+	
+	        return dtos;
+	    }
 
     // ACTUALIZAR PUNTUACIÓN DE RESERVA
     @PutMapping("/{id}/puntuacion")
