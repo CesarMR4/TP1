@@ -56,9 +56,20 @@ public class EstudianteController {
 
     @PutMapping("/{id}")
     public void actualizar(@PathVariable("id") Integer idEstudiante, @RequestBody Estudiante estudiante) {
+        Estudiante existente = pService.listId_Estudiante(idEstudiante)
+            .orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
+
+
         estudiante.setId(idEstudiante);
+        estudiante.setPassword(existente.getPassword());
+        estudiante.setFechaRegistro(existente.getFechaRegistro());
+        estudiante.setRol(existente.getRol());
+        estudiante.setCurriculum(existente.getCurriculum());
+
         pService.update(estudiante);
     }
+
+
 
     @DeleteMapping("/{id}")
     public void eliminar(@PathVariable("id") Integer idEstudiante) {
