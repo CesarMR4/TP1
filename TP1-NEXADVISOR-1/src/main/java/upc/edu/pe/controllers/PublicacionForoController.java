@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,4 +61,27 @@ public class PublicacionForoController {
         Optional<PublicacionForo> publicacion = publicacionService.listById(id);
         return publicacion.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+    
+    @PutMapping
+    public ResponseEntity<?> actualizar(@RequestBody PublicacionForo publicacion) {
+        if (publicacion.getId() <= 0) {
+            return ResponseEntity.badRequest().body("ID inválido para la publicación.");
+        }
+
+        Optional<PublicacionForo> existente = publicacionService.listById(publicacion.getId());
+        if (!existente.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        PublicacionForo actual = existente.get();
+        actual.setTitulo(publicacion.getTitulo());
+        actual.setContenido(publicacion.getContenido());
+        publicacionService.insert(actual);
+
+        return ResponseEntity.ok("Publicación actualizada correctamente.");
+    }
+
+
+    
+    
 }
