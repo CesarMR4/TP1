@@ -78,9 +78,17 @@ public class AsesorController {
 
     @PutMapping("/{id}")
     public void actualizar(@PathVariable("id") Integer idAsesor, @RequestBody Asesor asesor) {
-        asesor.setId(idAsesor);
-        aService.update(asesor);
+        Asesor existente = aService.listId(idAsesor).orElse(null);
+        if (existente != null) {
+            existente.setNombre(asesor.getNombre());
+            existente.setEmail(asesor.getEmail());
+            existente.setDireccion(asesor.getDireccion());
+            existente.setTelefono(asesor.getTelefono());
+            existente.setCarrera(asesor.getCarrera());
+            aService.update(existente);
+        }
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Asesor> obtenerPorId(@PathVariable("id") Integer id) {
