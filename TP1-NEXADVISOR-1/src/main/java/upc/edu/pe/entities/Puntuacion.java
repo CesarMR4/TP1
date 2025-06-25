@@ -15,8 +15,10 @@ public class Puntuacion {
 
     @Column(length = 500)
     private String comentario;
+    
+    @Transient
+    private int idAsesor;
    
-
     @ManyToOne
     @JoinColumn(name = "id_asesor", nullable = false)
     private Asesor asesor;
@@ -26,11 +28,12 @@ public class Puntuacion {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Puntuacion(int id_Puntuacion, int puntuacion, String comentario, Asesor asesor) {
+	public Puntuacion(int id_Puntuacion, int puntuacion, String comentario, int idAsesor, Asesor asesor) {
 		super();
 		this.id_Puntuacion = id_Puntuacion;
 		this.puntuacion = puntuacion;
 		this.comentario = comentario;
+		this.idAsesor = idAsesor;
 		this.asesor = asesor;
 	}
 
@@ -58,6 +61,14 @@ public class Puntuacion {
 		this.comentario = comentario;
 	}
 
+	public int getIdAsesor() {
+		return idAsesor;
+	}
+
+	public void setIdAsesor(int idAsesor) {
+		this.idAsesor = idAsesor;
+	}
+
 	public Asesor getAsesor() {
 		return asesor;
 	}
@@ -66,7 +77,7 @@ public class Puntuacion {
 		this.asesor = asesor;
 	}
 
- 
+	
 
   
 }

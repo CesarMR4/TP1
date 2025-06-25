@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import upc.edu.pe.entities.Asesor;
 import upc.edu.pe.entities.Puntuacion;
 import upc.edu.pe.serviceinterface.PuntuacionService;
 
@@ -18,14 +19,19 @@ public class PuntuacionController {
     private PuntuacionService pService;
     
     @PostMapping("/registrar")
-    public ResponseEntity<String> registrar(@RequestBody Puntuacion puntuacion) {
-        if (puntuacion.getPuntuacion() < 1 || puntuacion.getPuntuacion() > 5) {
-            return new ResponseEntity<>("La puntuación debe estar entre 1 y 5", HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Void> registrar(@RequestBody Puntuacion puntuacion) {
+        try {
+            Asesor asesor = new Asesor();
+            asesor.setId(puntuacion.getIdAsesor());
+            puntuacion.setAsesor(asesor);
+            pService.insert(puntuacion);
+            return ResponseEntity.ok().build(); 
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
-        pService.insert(puntuacion);
-        return new ResponseEntity<>("Puntuación registrada correctamente", HttpStatus.CREATED);
     }
-    
+
+        
     @GetMapping
     public List<Puntuacion> listar() {
         return pService.list();
