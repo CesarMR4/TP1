@@ -1,5 +1,6 @@
 package upc.edu.pe.controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,25 @@ public class ComentarioController {
 
   
     @PostMapping
-    public void registrar(@RequestBody Comentario comentario) {
-        comentarioService.insert(comentario);
+    public ResponseEntity<String> registrar(@RequestBody Comentario comentario) {
+        try {
+            if (comentario.getFechacreacion() == null) {
+                comentario.setFechacreacion(new Date());
+            }
+
+            if (comentario.getEstudiante() == null || comentario.getEstudiante().getId() == 0) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Estudiante inválido");
+            }
+
+            if (comentario.getAsesor() == null || comentario.getAsesor().getId() == 0) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Asesor inválido");
+            }
+
+            comentarioService.insert(comentario);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Comentario registrado");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al registrar comentario");
+        }
     }
 
   
