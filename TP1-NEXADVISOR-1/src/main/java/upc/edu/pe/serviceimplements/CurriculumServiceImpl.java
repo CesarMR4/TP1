@@ -19,7 +19,7 @@ public class CurriculumServiceImpl implements CurriculumService {
 	@Override
 	public void guardarCurriculumAnalizado(Curriculum curriculum) {
 		// TODO Auto-generated method stub
-        Optional<Curriculum> existente = curriculumRepository.findByReserva(curriculum.getReserva());
+		Optional<Curriculum> existente = curriculumRepository.findByReservaId(curriculum.getReserva().getId());
         if (existente.isPresent()) {
             Curriculum ca = existente.get();
             ca.setTextoCurriculum(curriculum.getTextoCurriculum());
@@ -33,7 +33,8 @@ public class CurriculumServiceImpl implements CurriculumService {
 
 	@Override
 	public Optional<Curriculum> buscarPorReserva(Reserva reserva) {
-		return curriculumRepository.findByReserva(reserva);
+		 return curriculumRepository.findByReservaId(reserva.getId());
 	}
+
 
 }

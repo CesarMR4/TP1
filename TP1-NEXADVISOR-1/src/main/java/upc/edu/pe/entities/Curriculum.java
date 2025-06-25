@@ -18,14 +18,11 @@ public class Curriculum {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Lob
-    @Column(name = "texto_curriculum", nullable = false, columnDefinition = "bytea")
-    private byte[] textoCurriculum;
+    @Column(name = "texto_curriculum", columnDefinition = "TEXT", nullable = false)
+    private String textoCurriculum;
 
-    @Lob
-    @Column(name = "reporte_ia", nullable = false, columnDefinition = "TEXT")
-    private String reporteIA; 
-
+    @Column(name = "reporte_ia", columnDefinition = "TEXT", nullable = false)
+    private String reporteIA;
     @OneToOne
     @JoinColumn(name = "reserva_id", referencedColumnName = "id", nullable = false, unique = true)
     private Reserva reserva;
@@ -35,7 +32,7 @@ public class Curriculum {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Curriculum(byte[] textoCurriculum, String reporteIA, Reserva reserva) {
+	public Curriculum(String textoCurriculum, String reporteIA, Reserva reserva) {
 		super();
 		this.textoCurriculum = textoCurriculum;
 		this.reporteIA = reporteIA;
@@ -50,14 +47,13 @@ public class Curriculum {
 		this.id = id;
 	}
 
-	public byte[] getTextoCurriculum() {
+	public String getTextoCurriculum() {
 		return textoCurriculum;
 	}
 
-	public void setTextoCurriculum(byte[] textoCurriculum) {
-		this.textoCurriculum = textoCurriculum;
+	public void setTextoCurriculum(String textoCurriculum) {
+	    this.textoCurriculum = textoCurriculum;
 	}
-
 	public String getReporteIA() {
 		return reporteIA;
 	}
