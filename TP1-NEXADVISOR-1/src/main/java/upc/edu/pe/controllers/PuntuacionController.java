@@ -19,6 +19,9 @@ public class PuntuacionController {
     
     @PostMapping("/registrar")
     public ResponseEntity<String> registrar(@RequestBody Puntuacion puntuacion) {
+        if (puntuacion.getPuntuacion() < 1 || puntuacion.getPuntuacion() > 5) {
+            return new ResponseEntity<>("La puntuación debe estar entre 1 y 5", HttpStatus.BAD_REQUEST);
+        }
         pService.insert(puntuacion);
         return new ResponseEntity<>("Puntuación registrada correctamente", HttpStatus.CREATED);
     }
@@ -35,6 +38,9 @@ public class PuntuacionController {
     
     @GetMapping("/promedio/{idAsesor}")
     public Double promedioPorAsesor(@PathVariable int idAsesor) {
-        return pService.obtenerPromedioPorAsesor(idAsesor);
+        Double promedio = pService.obtenerPromedioPorAsesor(idAsesor);
+        return promedio != null ? promedio : 0.0;
     }
+    
+    
 }
