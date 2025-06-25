@@ -14,4 +14,5 @@ public interface EstudianteService {
 		Optional<Estudiante> login(String email, String password);
 		Optional<Estudiante> findByEmail(String email);
 		void updatePassword(String email, String nuevaPassword);
+		Estudiante listarId(int id);
 }

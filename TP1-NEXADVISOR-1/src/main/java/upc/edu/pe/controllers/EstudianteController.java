@@ -56,8 +56,13 @@ public class EstudianteController {
 
     @PutMapping("/{id}")
     public void actualizar(@PathVariable("id") Integer idEstudiante, @RequestBody Estudiante estudiante) {
-        estudiante.setId(idEstudiante);
-        pService.update(estudiante);
+        Estudiante existente = pService.listarId(idEstudiante);
+        existente.setNombre(estudiante.getNombre());
+        existente.setEmail(estudiante.getEmail());
+        existente.setDireccion(estudiante.getDireccion());
+        existente.setTelefono(estudiante.getTelefono());
+        existente.setCarrera(estudiante.getCarrera());
+        pService.update(existente);
     }
 
     @DeleteMapping("/{id}")

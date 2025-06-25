@@ -63,6 +63,11 @@ public class EstudianteServiceImpl implements EstudianteService {
 		    }
 		
 	}
+	@Override
+	public Estudiante listarId(int id) {
+	    return estudianteRepository.findById(id).orElse(null);
+	}
+
 	
 	
 
