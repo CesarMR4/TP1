@@ -8,65 +8,48 @@ public class Puntuacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_Puntuacion;
+    private int id;
 
     @Column(nullable = false)
     private int puntuacion;
 
-    @Column(length = 500)
-    private String comentario;
-   
+    @OneToOne
+    @JoinColumn(name = "id_reserva", nullable = false, unique = true)
+    private Reserva reserva;
 
-    @ManyToOne
-    @JoinColumn(name = "id_asesor", nullable = false)
-    private Asesor asesor;
+    public Puntuacion() {}
 
-	public Puntuacion() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    public Puntuacion(int puntuacion, Reserva reserva) {
+        this.puntuacion = puntuacion;
+        this.reserva = reserva;
+    }
 
-	public Puntuacion(int id_Puntuacion, int puntuacion, String comentario, Asesor asesor) {
-		super();
-		this.id_Puntuacion = id_Puntuacion;
-		this.puntuacion = puntuacion;
-		this.comentario = comentario;
-		this.asesor = asesor;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getId_Puntuacion() {
-		return id_Puntuacion;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setId_Puntuacion(int id_Puntuacion) {
-		this.id_Puntuacion = id_Puntuacion;
-	}
+    public int getPuntuacion() {
+        return puntuacion;
+    }
 
-	public int getPuntuacion() {
-		return puntuacion;
-	}
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
 
-	public void setPuntuacion(int puntuacion) {
-		this.puntuacion = puntuacion;
-	}
+    public Reserva getReserva() {
+        return reserva;
+    }
 
-	public String getComentario() {
-		return comentario;
-	}
-
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
-	}
-
-	public Asesor getAsesor() {
-		return asesor;
-	}
-
-	public void setAsesor(Asesor asesor) {
-		this.asesor = asesor;
-	}
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
+    }
+}
 
  
 
   
-}
+
