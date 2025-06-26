@@ -45,7 +45,7 @@ public class CurriculumController {
     public ResponseEntity<String> subirYAnalizarCurriculum(
             @PathVariable int idReserva,
             @RequestParam("archivo") MultipartFile archivo) {
-
+        
         Optional<Reserva> reservaOpt = reservaService.buscarPorId(idReserva);
         if (!reservaOpt.isPresent()) {
             return ResponseEntity.badRequest().body("{\"error\": \"Reserva no encontrada\"}");
@@ -55,7 +55,6 @@ public class CurriculumController {
 
         String textoExtraido = ""; 
         try {
-          
             textoExtraido = analizadorTextoService.extraerTexto(archivo); 
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("{\"error\": \"No se pudo extraer el texto\"}");
@@ -65,7 +64,17 @@ public class CurriculumController {
 
         try {
             Curriculum curriculumAnalizado = new Curriculum();
-            curriculumAnalizado.setTextoCurriculum(archivo.getBytes()); 
+            curriculumAnalizado.setTextoCurriculum(archivo.getBytes());
+           
+
+         // 👉 Agrega esto para depurar el tipo de dato que se está intentando guardar
+         System.out.println("Clase del contenido de textoCurriculum: " + curriculumAnalizado.getTextoCurriculum().getClass().getName());
+         System.out.println("Bytes del archivo: " + curriculumAnalizado.getTextoCurriculum().length);
+
+            
+            // 👉 Agrega esta línea para depurar:
+            System.out.println("Bytes del archivo: " + curriculumAnalizado.getTextoCurriculum().length);
+
             curriculumAnalizado.setReporteIA(reporteIA);
             curriculumAnalizado.setReserva(reserva);
 
@@ -73,10 +82,10 @@ public class CurriculumController {
 
             return ResponseEntity.ok(reporteIA);
         } catch (Exception e) {
+            e.printStackTrace(); // 👉 También útil para ver el stacktrace completo
             return ResponseEntity.internalServerError().body("{\"error\": \"No se pudo guardar el archivo\"}");
         }
     }
-
 
     @GetMapping("/reporte/{idReserva}")
     public Curriculum obtenerReportePorReserva(@PathVariable int idReserva) {
