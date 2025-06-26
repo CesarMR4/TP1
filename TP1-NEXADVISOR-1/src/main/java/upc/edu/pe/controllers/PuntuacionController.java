@@ -1,6 +1,7 @@
 package upc.edu.pe.controllers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,22 +25,23 @@ public class PuntuacionController {
     private ReservaService reservaService;
 
     @PostMapping("/registrar/{idReserva}")
-    public ResponseEntity<String> registrar(@PathVariable int idReserva, @RequestBody Puntuacion puntuacion) {
+    public ResponseEntity<Map<String, String>> registrar(@PathVariable int idReserva, @RequestBody Puntuacion puntuacion) {
         Optional<Reserva> reservaOpt = reservaService.buscarPorId(idReserva);
         if (!reservaOpt.isPresent()) {
-            return ResponseEntity.badRequest().body("Reserva no encontrada");
+            return ResponseEntity.badRequest().body(Map.of("error", "Reserva no encontrada"));
         }
 
         Reserva reserva = reservaOpt.get();
 
         if (pService.obtenerPorReserva(reserva).isPresent()) {
-            return ResponseEntity.badRequest().body("Ya se ha registrado una puntuación para esta reserva.");
+            return ResponseEntity.badRequest().body(Map.of("error", "Ya se ha registrado una puntuación para esta reserva."));
         }
 
         puntuacion.setReserva(reserva);
         pService.insertar(puntuacion);
-        return ResponseEntity.ok("Puntuación registrada correctamente.");
+        return ResponseEntity.ok(Map.of("mensaje", "Puntuación registrada correctamente."));
     }
+
 
     @GetMapping("/promedio/{idAsesor}")
     public ResponseEntity<Double> promedioPorAsesor(@PathVariable int idAsesor) {
