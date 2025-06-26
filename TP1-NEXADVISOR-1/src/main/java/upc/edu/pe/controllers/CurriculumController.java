@@ -11,6 +11,11 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.ByteArrayOutputStream;
 import upc.edu.pe.entities.Curriculum;
 import upc.edu.pe.entities.Reserva;
@@ -39,11 +44,9 @@ public class CurriculumController {
 
             Reserva reserva = reservaOpt.get();
 
-            // Extraer texto del PDF
             InputStream inputStream = archivo.getInputStream();
             String textoExtraido = new Tika().parseToString(inputStream);
 
-            // Analizar con LanguageTool
             MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
             params.add("text", textoExtraido);
             params.add("language", "es");
@@ -55,9 +58,28 @@ public class CurriculumController {
             RestTemplate restTemplate = new RestTemplate();
             String respuestaIA = restTemplate.postForObject("https://api.languagetool.org/v2/check", request, String.class);
 
-            // Formar el reporte final
+            // Parsear respuesta JSON y generar resumen legible
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(respuestaIA);
+
+            StringBuilder errores = new StringBuilder();
+            errores.append("Errores detectados:\n\n");
+
+            for (JsonNode match : root.get("matches")) {
+                String mensaje = match.get("message").asText();
+                String tipo = match.get("rule").get("issueType").asText();
+                String categoria = match.get("rule").get("category").get("name").asText();
+                String contexto = match.get("context").get("text").asText();
+
+                errores.append("⚠️ Tipo: ").append(tipo)
+                       .append(" | Categoría: ").append(categoria)
+                       .append("\n→ ").append(mensaje)
+                       .append("\nTexto: ").append(contexto)
+                       .append("\n\n");
+            }
+
             String reporteFinal = "Texto Original:\n" + textoExtraido +
-                                  "\n\n--- Análisis IA ---\n" + respuestaIA;
+                                  "\n\n--- Análisis IA ---\n" + errores;
 
             Curriculum curriculum = new Curriculum(reporteFinal, reserva);
             curriculumService.guardarCurriculum(curriculum);
