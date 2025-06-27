@@ -71,8 +71,15 @@ public class ReservaController {
 
     // ELIMINAR RESERVA
     @DeleteMapping
-    public void eliminarReserva(@RequestParam int id) {
-        reservaService.delete(id);
+    public ResponseEntity<String> eliminarReserva(@RequestParam int id) {
+        try {
+            reservaService.delete(id);
+            return ResponseEntity.ok("Reserva eliminada exitosamente.");
+        } catch (Exception e) {
+            return ResponseEntity
+                    .badRequest()
+                    .body("No se puede eliminar la reserva. Puede que tenga puntuación u otros datos relacionados.");
+        }
     }
 
     // ACTUALIZAR ESTADO
