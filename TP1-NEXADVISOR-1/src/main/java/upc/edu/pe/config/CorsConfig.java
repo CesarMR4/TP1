@@ -8,8 +8,9 @@ public class CorsConfig implements WebMvcConfigurer {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**") // Aplica a todos los endpoints REST
-                .allowedOrigins("http://localhost:4200") // URL del frontend Angular
+        registry.addMapping("/**") 
+                .allowedOrigins("http://localhost:4200",  "http://nexadvisor-frontend.s3-website-us-east-1.amazonaws.com") 
+                
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true);

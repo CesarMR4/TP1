@@ -58,7 +58,6 @@ public class CurriculumController {
             RestTemplate restTemplate = new RestTemplate();
             String respuestaIA = restTemplate.postForObject("https://api.languagetool.org/v2/check", request, String.class);
 
-            // Parsear respuesta JSON y generar resumen legible
             ObjectMapper mapper = new ObjectMapper();
             JsonNode root = mapper.readTree(respuestaIA);
 
@@ -122,7 +121,7 @@ public class CurriculumController {
         String contenido = curriculumOpt.get().getReporteIA();
 
         try {
-            // Crear PDF en memoria
+        
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             com.itextpdf.text.Document document = new com.itextpdf.text.Document();
             com.itextpdf.text.pdf.PdfWriter.getInstance(document, out);

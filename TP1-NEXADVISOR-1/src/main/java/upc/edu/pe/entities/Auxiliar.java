@@ -10,7 +10,6 @@ public class Auxiliar {
 	    public Auxiliar () {
 	    }
 
-	    // Getters y Setters
 	    public String getEmail() {
 	        return email;
 	    }

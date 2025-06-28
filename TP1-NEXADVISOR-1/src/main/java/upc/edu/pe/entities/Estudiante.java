@@ -45,12 +45,10 @@ public class Estudiante {
     @Column(name = "curriculum", length = 50)
     private byte[] curriculum;
 
-    // 🔁 RELACIÓN INVERSA
     @OneToMany(mappedBy = "estudiante")
     @JsonIgnore
     private List<Reserva> reservas;
 
-    // Getters y setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

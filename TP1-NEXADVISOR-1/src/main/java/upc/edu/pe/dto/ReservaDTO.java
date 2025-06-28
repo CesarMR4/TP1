@@ -11,7 +11,6 @@ public class ReservaDTO {
     private int estudianteId;
     private String estudianteNombre;
 
-    // Constructor completo
     public ReservaDTO(int id, String estado, String comentarioAsesor, String horaReserva, Date fechaReserva, int estudianteId, String estudianteNombre) {
         this.id = id;
         this.estado = estado;
@@ -22,7 +21,6 @@ public class ReservaDTO {
         this.estudianteNombre = estudianteNombre;
     }
 
-    // Getters y setters
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

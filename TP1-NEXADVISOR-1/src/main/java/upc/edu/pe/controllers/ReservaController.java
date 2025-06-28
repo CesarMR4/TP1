@@ -33,10 +33,9 @@ public class ReservaController {
     @Autowired
     private ReservaRepository reservaRepository;
 
-    // ✅ REGISTRAR RESERVA (CORREGIDO)
     @PostMapping
     public void registrarReserva(@RequestBody Reserva reserva) {
-        // Asegura que solo se utilicen los IDs para evitar duplicación
+      
         int idAsesor = reserva.getAsesor().getId();
         Asesor asesor = new Asesor();
         asesor.setId(idAsesor);
@@ -49,11 +48,9 @@ public class ReservaController {
 
         reservaService.insert(reserva);
 
-        // Notificar al asesor
-        String mensaje = "Nuevo estudiante ha realizado una reserva.";
+          String mensaje = "Nuevo estudiante ha realizado una reserva.";
         notificacionController.notificarReserva(idAsesor, mensaje);
 
-        // Registrar en historial
         Historial historial = new Historial();
         historial.setDescripcion("Reserva con el asesor " + idAsesor);
         historial.setFecha(new Date());
@@ -63,13 +60,11 @@ public class ReservaController {
         historialService.insert(historial);
     }
 
-    // LISTAR TODAS LAS RESERVAS
     @GetMapping
     public List<Reserva> listarReservas() {
         return reservaService.list();
     }
 
-    // ELIMINAR RESERVA
     @DeleteMapping
     public ResponseEntity<String> eliminarReserva(@RequestParam int id) {
         try {
@@ -82,25 +77,21 @@ public class ReservaController {
         }
     }
 
-    // ACTUALIZAR ESTADO
     @PostMapping("/actualizarEstado")
     public void actualizarEstado(@RequestParam int idReserva, @RequestParam String estado) {
         reservaService.updateEstado(idReserva, estado);
     }
 
-    // ACTUALIZAR COMENTARIO
     @PutMapping("/comentario/{id}")
     public void actualizarComentario(@PathVariable("id") Integer idReserva, @RequestBody String comentario) {
         reservaService.actualizarComentario(idReserva, comentario);
     }
     
-    // LISTAR RESERVAS POR ESTUDIANTE
     @GetMapping("/estudiante/{id}")
     public List<Reserva> listarPorEstudiante(@PathVariable("id") int idEstudiante) {
         return reservaService.listarPorEstudiante(idEstudiante);
     }
 
-	    // LISTAR RESERVAS POR ASESOR
 	    @GetMapping("/asesor/{id}")
 	    public List<ReservaDTO> listarPorAsesor(@PathVariable("id") int idAsesor) {
 	        List<Reserva> reservas = reservaService.listarPorAsesor(idAsesor);
@@ -121,7 +112,6 @@ public class ReservaController {
 	        return dtos;
 	    }
 
-    // ACTUALIZAR PUNTUACIÓN DE RESERVA
     @PutMapping("/{id}/puntuacion")
     public ResponseEntity<Reserva> actualizarPuntuacion(@PathVariable("id") Integer idReserva, @RequestBody Integer puntuacion) {
         Optional<Reserva> optionalReserva = reservaRepository.findById(idReserva);

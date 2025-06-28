@@ -21,7 +21,6 @@ public class ReservaServiceImpl implements ReservaService{
 
     @Override
     public void insert(Reserva reserva) {
-        // Forzar que se cree una nueva reserva
         reserva.setId(0);
 
         reservaRepository.save(reserva);

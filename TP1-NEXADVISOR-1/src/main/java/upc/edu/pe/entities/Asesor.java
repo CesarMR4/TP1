@@ -52,7 +52,6 @@ public class Asesor {
     @Column(name = "rol", nullable = false, length = 10)
     private String rol = "asesor";
 
-    // 🔁 RELACIÓN INVERSA
     @OneToMany(mappedBy = "asesor")
     @JsonIgnore
     private List<Reserva> reservas;
