@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,4 +61,23 @@ public class PublicacionForoController {
         Optional<PublicacionForo> publicacion = publicacionService.listById(id);
         return publicacion.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<?> actualizar(@PathVariable("id") int id, @RequestBody PublicacionForo publicacionActualizada) {
+        Optional<PublicacionForo> publicacionOptional = publicacionService.listById(id);
+
+        if (!publicacionOptional.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        PublicacionForo publicacionExistente = publicacionOptional.get();
+        publicacionExistente.setTitulo(publicacionActualizada.getTitulo());
+        publicacionExistente.setContenido(publicacionActualizada.getContenido());
+        // publicacionExistente.setFechaPublicacion(new Date());
+
+        publicacionService.insert(publicacionExistente); 
+
+        return ResponseEntity.ok().build();
+    }
+    
 }
