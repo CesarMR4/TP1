@@ -10,7 +10,7 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**") 
                 .allowedOrigins("http://localhost:4200",  "http://nexadvisor-frontend.s3-website-us-east-1.amazonaws.com",
-                		"https://nexadvisor-frontend.s3-website-us-east-1.amazonaws.com","https://d3j7fzwpgt0hl7.cloudfront.net","d3j7fzwpgt0hl7.cloudfront.net") 
+                		"https://nexadvisor-frontend.s3-website-us-east-1.amazonaws.com") 
                 
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
