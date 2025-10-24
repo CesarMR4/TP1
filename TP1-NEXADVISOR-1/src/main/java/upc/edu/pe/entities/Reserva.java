@@ -48,7 +48,7 @@ public class Reserva {
 	}
 
 	public Reserva(int id, Date fechaReserva, String horaReserva, String estado, String comentarioAsesor,
-			int puntuacion, Estudiante estudiante, Asesor asesor) {
+			Integer puntuacion, Estudiante estudiante, Asesor asesor) {
 		super();
 		this.id = id;
 		this.fechaReserva = fechaReserva;
@@ -67,11 +67,11 @@ public class Reserva {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getPuntuacion() {
+	public Integer getPuntuacion() {
 		return puntuacion;
 	}
 
-	public void setPuntuacion(int puntuacion) {
+	public void setPuntuacion(Integer puntuacion) {
 		this.puntuacion = puntuacion;
 	}
 

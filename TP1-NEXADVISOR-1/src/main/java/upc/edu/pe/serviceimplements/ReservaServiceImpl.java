@@ -65,8 +65,15 @@ public class ReservaServiceImpl implements ReservaService{
 
 	@Override
 	public List<Reserva> listarPorEstudiante(int id) {
-		return reservaRepository.findByEstudiante_Id(id);
+		//return reservaRepository.findByEstudiante_Id(id);
 
+	    List<Reserva> reservas = reservaRepository.findByEstudiante_Id(id);
+	    System.out.println("🔹 Reservas encontradas para estudiante ID " + id + ": " + reservas.size());
+	    for (Reserva r : reservas) {
+	        System.out.println("Reserva ID: " + r.getId() + ", asesor: " + (r.getAsesor() != null ? r.getAsesor().getNombre() : "null"));
+	    }
+	    return reservas;
+		
 	}
 	@Override
 	public List<Reserva> listarPorAsesor(int idAsesor) {
