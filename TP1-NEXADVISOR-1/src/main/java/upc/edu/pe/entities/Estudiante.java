@@ -16,33 +16,33 @@ public class Estudiante {
     @Column(name = "id_estudiante")
     private int id;
 
-    @Column(name = "nombre",nullable = false, length = 50)
+    @Column(name = "nombre",nullable = false, length = 70)
     private String nombre;
 
-    @Column(name = "email",nullable = false, length = 50)
+    @Column(name = "email",nullable = false, length = 70)
     private String email;
 
-    @Column(name = "contrasena",nullable = false, length = 50)
+    @Column(name = "contrasena",nullable = false, length = 70)
     private String password;
 
-    @Column(name = "direccion",nullable = false, length = 50)
+    @Column(name = "direccion",nullable = false, length = 70)
     private String direccion;
 
-    @Column(name = "telefono",nullable = false, length = 50)
+    @Column(name = "telefono",nullable = false, length = 70)
     private String telefono;
 
-    @Column(name = "carrera", nullable = false, length = 50)
+    @Column(name = "carrera", nullable = false, length = 70)
     private String carrera;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "fecha_registro", nullable = false, length = 50)
+    @Column(name = "fecha_registro", nullable = false, length = 70)
     private Date fechaRegistro;
 
-    @Column(name = "rol",nullable = false, length = 50)
+    @Column(name = "rol",nullable = false, length = 70)
     private String rol = "estudiante";
 
     @Lob
-    @Column(name = "curriculum", length = 50)
+    @Column(name = "curriculum", length = 70)
     private byte[] curriculum;
 
     @OneToMany(mappedBy = "estudiante")

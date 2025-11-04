@@ -19,22 +19,22 @@ public class Asesor {
     @Column(name = "id_asesor") 
     private int id; 
 
-    @Column(name = "nombre", nullable = false, length = 25)
+    @Column(name = "nombre", nullable = false, length = 70)
     private String nombre;
 
-    @Column(name = "email", nullable = false, length = 25)
+    @Column(name = "email", nullable = false, length = 70)
     private String email;
 
-    @Column(name = "contrasena", nullable = false, length = 25)
+    @Column(name = "contrasena", nullable = false, length = 70)
     private String password;
 
-    @Column(name = "direccion", nullable = false, length = 25)
+    @Column(name = "direccion", nullable = false, length = 70)
     private String direccion;
 
-    @Column(name = "telefono", nullable = false, length = 25)
+    @Column(name = "telefono", nullable = false, length = 70)
     private String telefono;
 
-    @Column(name = "sector", nullable = false, length = 25)
+    @Column(name = "sector", nullable = false, length = 70)
     private String sector;
 
     @Lob
@@ -42,7 +42,7 @@ public class Asesor {
     @Column(name = "curriculum")
     private byte[] curriculum;
 
-    @Column(name = "carrera", nullable = false, length = 25)
+    @Column(name = "carrera", nullable = false, length = 70)
     private String carrera;
 
     @Temporal(TemporalType.TIMESTAMP)
