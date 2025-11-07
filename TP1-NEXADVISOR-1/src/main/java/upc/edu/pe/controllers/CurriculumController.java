@@ -107,6 +107,7 @@ public class CurriculumController {
     }
     
     @GetMapping("/reporte/{idReserva}/pdf")
+    /*
     public ResponseEntity<byte[]> descargarPDF(@PathVariable int idReserva) {
         Optional<Reserva> reservaOpt = reservaService.buscarPorId(idReserva);
         if (!reservaOpt.isPresent()) {
@@ -145,5 +146,72 @@ public class CurriculumController {
             return ResponseEntity.internalServerError().build();
         }
     }
+*/
+    public ResponseEntity<byte[]> descargarPDF(@PathVariable int idReserva) {
+        Optional<Reserva> reservaOpt = reservaService.buscarPorId(idReserva);
+        if (!reservaOpt.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
 
+        Optional<Curriculum> curriculumOpt = curriculumService.buscarPorReserva(reservaOpt.get());
+        if (!curriculumOpt.isPresent()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        String contenido = curriculumOpt.get().getReporteIA();
+
+        try {
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            com.itextpdf.text.Document document = new com.itextpdf.text.Document();
+            com.itextpdf.text.pdf.PdfWriter writer = com.itextpdf.text.pdf.PdfWriter.getInstance(document, out);
+
+         
+            writer.setCompressionLevel(9);
+
+            document.open();
+
+      
+            String[] lineas = contenido.split("\\r?\\n");
+            for (String linea : lineas) {
+                if (linea == null || linea.trim().isEmpty()) {
+                
+                    document.add(new com.itextpdf.text.Paragraph(" "));
+                    continue;
+                }
+
+            
+                final int MAX_BLOCK = 1000; 
+                if (linea.length() <= MAX_BLOCK) {
+                    document.add(new com.itextpdf.text.Paragraph(linea));
+                } else {
+                    int start = 0;
+                    while (start < linea.length()) {
+                        int end = Math.min(start + MAX_BLOCK, linea.length());
+                        String bloque = linea.substring(start, end);
+                        document.add(new com.itextpdf.text.Paragraph(bloque));
+                        start = end;
+                    }
+                }
+            }
+
+            document.close();
+
+            byte[] pdfBytes = out.toByteArray();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition
+                    .attachment()
+                    .filename("cv_reserva_" + idReserva + ".pdf")
+                    .build());
+
+            return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+    
+    
 }
