@@ -73,7 +73,7 @@ public class ReservaController {
         } catch (Exception e) {
             return ResponseEntity
                     .badRequest()
-                    .body("No se puede eliminar la reserva. Puede que tenga puntuación u otros datos relacionados.");
+                    .body("Esta reserva no puede cancelar porque ya tiene datos asociados como una puntuación, comentario o CV");
         }
     }
 
